@@ -214,7 +214,7 @@ public partial class TheCityBackground : NCombatBackground
                 1 => "ceiling_boom_2",
                 _ => "ceiling_boom_3"
             };
-            ModAudio.Play("general", sound, 0f, 0.2f);
+            AFTPModAudio.Play("general", sound, 0f, 0.2f);
         }
         else
         {
@@ -224,7 +224,7 @@ public partial class TheCityBackground : NCombatBackground
                 1 => "ceiling_dust_2",
                 _ => "ceiling_dust_3"
             };
-            ModAudio.Play("general", sound, 0f, 0.2f);
+            AFTPModAudio.Play("general", sound, 0f, 0.2f);
         }
     }
 

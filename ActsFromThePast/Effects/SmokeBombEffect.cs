@@ -29,7 +29,7 @@ public partial class SmokeBombEffect : NSts1Effect
         if (!_spawned)
         {
             _spawned = true;
-            ModAudio.Play("general", "attack_whiff_2");
+            AFTPModAudio.Play("general", "attack_whiff_2");
             
             for (int i = 0; i < ParticleCount; i++)
             {
@@ -42,7 +42,7 @@ public partial class SmokeBombEffect : NSts1Effect
         
         if (Duration < 0f)
         {
-            ModAudio.Play("general", "appear");
+            AFTPModAudio.Play("general", "appear");
             IsDone = true;
         }
     }

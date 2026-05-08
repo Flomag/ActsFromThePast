@@ -1,4 +1,5 @@
-﻿using BaseLib.Abstracts;
+﻿using ActsFromThePast.Interfaces;
+using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -8,7 +9,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 
 namespace ActsFromThePast.SharedEvents;
 
-public sealed class GoldenShrine : CustomEventModel
+public sealed class GoldenShrine : CustomEventModel, IShrineEvent
 {
     
     // TODO add gold VFX to this

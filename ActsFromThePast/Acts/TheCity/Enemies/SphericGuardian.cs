@@ -66,7 +66,7 @@ public sealed class SphericGuardian : CustomMonsterModel
             0 => "spheric_guardian_talk_1",
             _ => "spheric_guardian_talk_2"
         };
-        ModAudio.Play("spheric_guardian", sfxName);
+        AFTPModAudio.Play("spheric_guardian", sfxName);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -141,7 +141,7 @@ public sealed class SphericGuardian : CustomMonsterModel
         {
             await DamageCmd.Attack(AttackDamage)
                 .FromMonster(this)
-                .WithHitFx("vfx/vfx_attack_blunt")
+                .WithHitFx("vfx/vfx_attack_blunt", tmpSfx: "blunt_attack.mp3")
                 .Execute(null);
         }
     }

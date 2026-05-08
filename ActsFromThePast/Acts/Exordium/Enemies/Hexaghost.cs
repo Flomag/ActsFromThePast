@@ -407,7 +407,7 @@ public sealed class Hexaghost : CustomMonsterModel
     private void PlayGhostOrbIgniteSfx()
     {
         var sfxName = Rng.Chaotic.NextInt(2) == 0 ? "ghost_orb_ignite_1" : "ghost_orb_ignite_2";
-        ModAudio.Play("hexaghost", sfxName);
+        AFTPModAudio.Play("hexaghost", sfxName);
     }
 
 private void PlayExhaustSfx()

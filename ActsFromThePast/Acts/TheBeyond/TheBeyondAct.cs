@@ -40,6 +40,7 @@ public sealed class TheBeyondAct : CustomActModel
     public override Color MapTraveledColor => new Color("1D1E2F");
     public override Color MapUntraveledColor => new Color("60717C");
     public override Color MapBgColor => new Color("819A97");
+    protected override int NumberOfWeakEncounters => 2;
 
     protected override string CustomMapTopBgPath => "res://images/packed/map/map_bgs/the_beyond_act/map_top_the_beyond_act.png";
     protected override string CustomMapMidBgPath => "res://images/packed/map/map_bgs/the_beyond_act/map_middle_the_beyond_act.png";

@@ -17,7 +17,7 @@ public sealed class EntangledPower : CustomPowerModel
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        ModAudio.Play("general", "entangle");
+        AFTPModAudio.Play("general", "entangle");
         foreach (var card in Owner.Player.PlayerCombatState.AllCards.Where(c => c.Type == CardType.Attack))
         {
             await CardCmd.Afflict<EntangledOriginal>(card, 1m);

@@ -24,7 +24,7 @@ public sealed class Sssserpent : CustomEventModel
 
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "ssserpent");
+        AFTPModAudio.Play("events", "ssserpent");
     }
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()

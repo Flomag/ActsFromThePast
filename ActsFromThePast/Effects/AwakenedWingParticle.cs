@@ -18,6 +18,7 @@ public partial class AwakenedWingParticle : NSts1Effect
     private Vector2 _offset;
     private NCreature _creatureNode;
     private GodotObject _bone;
+    private bool _frozen;
     public bool RenderBehind { get; private set; }
 
     public static AwakenedWingParticle Create(NCreature creatureNode, GodotObject bone)
@@ -117,7 +118,11 @@ public partial class AwakenedWingParticle : NSts1Effect
             return;
         }
 
-        GlobalPosition = GetBoneWorldPos();
+        if (!_frozen && _creatureNode?.Entity?.IsDead == true)
+            _frozen = true;
+
+        if (!_frozen)
+            GlobalPosition = GetBoneWorldPos();
 
         float scale;
         if (Duration > 1.0f)

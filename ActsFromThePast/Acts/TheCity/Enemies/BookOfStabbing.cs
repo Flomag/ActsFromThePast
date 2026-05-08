@@ -61,7 +61,7 @@ public sealed class BookOfStabbing : CustomMonsterModel
     private void OnDeath(Creature _)
     {
         Creature.Died -= OnDeath;
-        ModAudio.Play("book_of_stabbing", "book_of_stabbing_death");
+        AFTPModAudio.Play("book_of_stabbing", "book_of_stabbing_death");
     }
     
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -172,7 +172,7 @@ public sealed class BookOfStabbing : CustomMonsterModel
     {
         var roll = Rng.Chaotic.NextInt(4) + 1;
         var sfxName = $"book_of_stabbing_attack_{roll}";
-        ModAudio.Play("book_of_stabbing", sfxName);
+        AFTPModAudio.Play("book_of_stabbing", sfxName);
     }
     
     private async Task BigStab(IReadOnlyList<Creature> targets)

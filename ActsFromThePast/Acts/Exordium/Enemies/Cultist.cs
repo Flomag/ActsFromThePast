@@ -73,7 +73,7 @@ public sealed class Cultist : CustomMonsterModel
             1 => "cultist_death_2",
             _ => "cultist_death_3"
         };
-        ModAudio.Play("cultist", sfxName);
+        AFTPModAudio.Play("cultist", sfxName);
     }
 
     
@@ -133,7 +133,7 @@ public sealed class Cultist : CustomMonsterModel
             1 => "cultist_talk_2",
             _ => "cultist_talk_3"
         };
-        ModAudio.Play("cultist", sfxName);
+        AFTPModAudio.Play("cultist", sfxName);
     }
     
     private async Task DarkStrike(IReadOnlyList<Creature> targets)

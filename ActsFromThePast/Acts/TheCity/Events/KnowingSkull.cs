@@ -1,6 +1,8 @@
-﻿using BaseLib.Abstracts;
+﻿using ActsFromThePast.Interfaces;
+using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -9,11 +11,12 @@ using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace ActsFromThePast.Acts.TheCity.Events;
 
-public sealed class KnowingSkull : CustomEventModel
+public sealed class KnowingSkull : CustomEventModel, IShrineEvent
 {
     private const int BaseCost = 6;
     private const int GoldReward = 90;
@@ -23,6 +26,8 @@ public sealed class KnowingSkull : CustomEventModel
     private int _leaveCost = BaseCost;
 
     public override ActModel[] Acts => new[] { ModelDb.Act<TheCityAct>() };
+    
+    bool IShrineEvent.IsOneTimeEvent => true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
     {
@@ -43,7 +48,12 @@ public sealed class KnowingSkull : CustomEventModel
 
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "knowing_skull");
+        AFTPModAudio.Play("events", "knowing_skull");
+    }
+    
+    public override bool IsAllowed(IRunState runState)
+    {
+        return runState.Players.All<Player>((Func<Player, bool>) (p => p.Creature.CurrentHp >= 13));
     }
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
@@ -62,10 +72,10 @@ public sealed class KnowingSkull : CustomEventModel
         UpdateDynamicVars();
         SetEventState(description, new[]
         {
-            Option(Potion, "ASK"),
-            Option(Gold, "ASK"),
-            Option(Card, "ASK"),
-            Option(Leave, "ASK")
+            Option(Potion, "ASK").ThatDoesDamage(_potionCost),
+            Option(Gold, "ASK").ThatDoesDamage(_goldCost),
+            Option(Card, "ASK").ThatDoesDamage(_cardCost),
+            Option(Leave, "ASK").ThatDoesDamage(_leaveCost)
         });
     }
 

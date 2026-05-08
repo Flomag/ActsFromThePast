@@ -71,7 +71,7 @@ public sealed class GremlinSneaky : CustomMonsterModel
             1 => "gremlin_sneaky_death_2",
             _ => "gremlin_sneaky_death_3"
         };
-        ModAudio.Play("gremlin_sneaky", sfxName);
+        AFTPModAudio.Play("gremlin_sneaky", sfxName);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

@@ -47,7 +47,7 @@ public sealed class TheMausoleum : CustomEventModel
 
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "ghosts");
+        AFTPModAudio.Play("events", "ghosts");
     }
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()

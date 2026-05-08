@@ -175,7 +175,7 @@ public sealed class Guardian : CustomMonsterModel
     private async Task ChargeUp(IReadOnlyList<Creature> targets)
     {
         await CreatureCmd.GainBlock(Creature, ChargeUpBlock, ValueProp.Move, null);
-        ModAudio.Play("guardian", "guardian_destroy");
+        AFTPModAudio.Play("guardian", "guardian_destroy");
         TalkCmd.Play(_destroyDialog, Creature, VfxColor.Gold, VfxDuration.VeryLong);
         await CheckPendingModeShift();
     }
@@ -203,11 +203,11 @@ public sealed class Guardian : CustomMonsterModel
     private async Task Whirlwind(IReadOnlyList<Creature> targets)
     {
         await FastAttackAnimation.Play(Creature);
-        ModAudio.Play("general", "whirlwind");
+        AFTPModAudio.Play("general", "whirlwind");
 
         for (int i = 0; i < WhirlwindCount; i++)
         {
-            ModAudio.Play("general", "attack_heavy");
+            AFTPModAudio.Play("general", "attack_heavy");
 
             var target = targets.FirstOrDefault(t => t.IsAlive);
             if (target != null)
@@ -261,7 +261,7 @@ public sealed class Guardian : CustomMonsterModel
     {
         await PowerCmd.Remove<ModeShiftPower>(Creature);
         _nextThreshold += DmgThresholdIncrease;
-        ModAudio.Play("guardian", "guardian_boss_transform");
+        AFTPModAudio.Play("guardian", "guardian_boss_transform");
         await CreatureCmd.GainBlock(Creature, DefensiveBlock, ValueProp.Move, null);
 
         await CreatureCmd.TriggerAnim(Creature, "transition", 0.0f);

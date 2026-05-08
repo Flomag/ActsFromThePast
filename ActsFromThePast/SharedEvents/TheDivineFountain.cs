@@ -1,4 +1,5 @@
-﻿using BaseLib.Abstracts;
+﻿using ActsFromThePast.Interfaces;
+using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Events;
@@ -9,11 +10,13 @@ using MegaCrit.Sts2.Core.Runs;
 
 namespace ActsFromThePast.SharedEvents;
 
-public sealed class TheDivineFountain : CustomEventModel
+public sealed class TheDivineFountain : CustomEventModel, IShrineEvent
 {
     private const int MaxHpPerCurse = 3;
 
     public override ActModel[] Acts => Array.Empty<ActModel>();
+    
+    bool IShrineEvent.IsOneTimeEvent => true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
     {

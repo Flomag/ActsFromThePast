@@ -16,6 +16,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Nodes;
+using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Screens.Shops;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
@@ -227,5 +228,44 @@ public static class TheBoxPurchaseDialoguePatch
         var showRandom = AccessTools.Method(typeof(NMerchantDialogue), "ShowRandom");
         showRandom?.Invoke(__instance, new object[] { new List<LocString> { _removeLine1, _removeLine2 } });
         return false;
+    }
+}
+
+[HarmonyPatch(typeof(CardCmd))]
+public static class NecronomicurseTransformPatch
+{
+    [HarmonyPatch(nameof(CardCmd.TransformToRandom))]
+    [HarmonyPrefix]
+    public static bool TransformToRandomPrefix(
+        CardModel original,
+        ref Task<CardPileAddResult> __result,
+        CardPreviewStyle style)
+    {
+        if (original is not Necronomicurse)
+            return true;
+        
+        __result = ForceNecronomicurse(original, style);
+        return false;
+    }
+
+
+    private static async Task<CardPileAddResult> ForceNecronomicurse(
+        CardModel original, CardPreviewStyle style)
+    {
+        var result = await CardCmd.TransformTo<Necronomicurse>(original, style);
+        return result ?? new CardPileAddResult { success = false };
+    }
+
+    [HarmonyPatch(nameof(CardCmd.Transform),
+        new[] { typeof(CardModel), typeof(CardModel), typeof(CardPreviewStyle) })]
+    [HarmonyPrefix]
+    public static void TransformDirectPrefix(
+        CardModel original,
+        ref CardModel replacement)
+    {
+        if (original is Necronomicurse && replacement is not Necronomicurse)
+        {
+            replacement = original.CardScope.CreateCard<Necronomicurse>(original.Owner);
+        }
     }
 }

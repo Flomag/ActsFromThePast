@@ -44,7 +44,7 @@ public sealed class GoldenIdol : CustomEventModel
 
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "golden_idol");
+        AFTPModAudio.Play("events", "golden_idol");
     }
 
     private IEnumerable<RelicModel> GetTradableRelics()

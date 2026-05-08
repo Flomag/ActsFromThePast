@@ -47,7 +47,7 @@ public sealed class GremlinShield : CustomMonsterModel
             0 => "gremlin_shield_death_1",
             _ => "gremlin_shield_death_2"
         };
-        ModAudio.Play("gremlin_shield", sfxName);
+        AFTPModAudio.Play("gremlin_shield", sfxName);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()

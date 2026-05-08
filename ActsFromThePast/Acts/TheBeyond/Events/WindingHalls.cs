@@ -44,7 +44,7 @@ public sealed class WindingHalls : CustomEventModel
 
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "winding_halls");
+        AFTPModAudio.Play("events", "winding_halls");
     }
 
     private Task Continue()
@@ -92,7 +92,7 @@ public sealed class WindingHalls : CustomEventModel
                 null, null);
         }
 
-        ModAudio.Play("general", "attack_magic_slow_1");
+        AFTPModAudio.Play("general", "attack_magic_slow_1");
         for (int i = 0; i < count; i++)
         {
             var card = Owner.RunState.CreateCard(ModelDb.Card<Madness>(), Owner);

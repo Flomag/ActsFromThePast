@@ -1,4 +1,5 @@
-﻿using BaseLib.Abstracts;
+﻿using ActsFromThePast.Interfaces;
+using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Gold;
@@ -11,7 +12,7 @@ using MegaCrit.Sts2.Core.Runs;
 
 namespace ActsFromThePast.SharedEvents;
 
-public sealed class WeMeetAgain : CustomEventModel
+public sealed class WeMeetAgain : CustomEventModel, IShrineEvent
 {
     private const int MinGold = 50;
     private const int MaxGold = 150;
@@ -21,6 +22,8 @@ public sealed class WeMeetAgain : CustomEventModel
     private int _goldAmount;
 
     public override ActModel[] Acts => Array.Empty<ActModel>();
+    
+    bool IShrineEvent.IsOneTimeEvent => true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
     {

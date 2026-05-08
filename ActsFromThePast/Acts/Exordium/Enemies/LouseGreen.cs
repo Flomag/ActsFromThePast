@@ -131,7 +131,7 @@ public sealed class LouseGreen : CustomMonsterModel
             await Cmd.Wait(0.5f);
         }
 
-        ModAudio.Play("general", "attack_magic_fast_3", 0f, 0.02f, 1.9f);
+        AFTPModAudio.Play("general", "attack_magic_fast_3", 0f, 0.02f, 1.9f);
     
         var combatRoom = NCombatRoom.Instance;
         var louseNode = combatRoom?.GetCreatureNode(Creature);

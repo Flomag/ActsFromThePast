@@ -67,7 +67,7 @@ public sealed class TimeWarpPower : CustomPowerModel
             DynamicVars[_cardCountKey].BaseValue = 0M;
             InvokeDisplayAmountChanged();
             Flash();
-            ModAudio.Play("time_eater", "time_warp");
+            AFTPModAudio.Play("time_eater", "time_warp");
             BorderFlashEffect.PlayGold();
             var effect = TimeWarpTurnEndEffect.Create();
             NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(effect);

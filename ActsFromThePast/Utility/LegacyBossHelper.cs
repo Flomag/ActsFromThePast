@@ -14,8 +14,8 @@ public static class LegacyBossHelper
             controller.StopMusic();
         }
 
-        ModAudio.Play("boss", "boss_victory_stinger");
-        ModAudio.PlayBossStinger();
+        AFTPModAudio.Play("boss", "boss_victory_stinger");
+        AFTPModAudio.PlayBossStinger();
         MusicPatches.LegacyActMusicPatches.SetBossStingerState();
     }
 }

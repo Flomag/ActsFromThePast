@@ -14,7 +14,7 @@ public sealed class AncientWriting : CustomEventModel
 
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "ancient_writing");
+        AFTPModAudio.Play("events", "ancient_writing");
     }
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()

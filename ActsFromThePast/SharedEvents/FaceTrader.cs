@@ -13,13 +13,15 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace ActsFromThePast.SharedEvents;
 
 
-public sealed class FaceTrader : CustomEventModel, IActRestricted
+public sealed class FaceTrader : CustomEventModel, IActRestricted, IShrineEvent
 {
     private const int GoldReward = 50;
     
-    public int[] AllowedActIndices => new[] { 2, 3 };
+    public int[] AllowedActIndices => new[] { 1, 2 };
 
     public override ActModel[] Acts => Array.Empty<ActModel>();
+    
+    bool IShrineEvent.IsOneTimeEvent => true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
     {

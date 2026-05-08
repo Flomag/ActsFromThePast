@@ -53,7 +53,7 @@ public sealed class ScrapOoze : CustomEventModel
 
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "scrap_ooze");
+        AFTPModAudio.Play("events", "scrap_ooze");
     }
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()

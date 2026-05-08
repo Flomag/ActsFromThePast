@@ -60,7 +60,7 @@ public sealed class Chosen : CustomMonsterModel
         if (creature != Creature)
             return;
 
-        ModAudio.Play("chosen", "chosen_death");
+        AFTPModAudio.Play("chosen", "chosen_death");
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()

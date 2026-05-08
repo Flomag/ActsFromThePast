@@ -2,6 +2,7 @@
 using BaseLib.Abstracts;
 using Godot;
 using MegaCrit.Sts2.Core.Animation;
+using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Audio;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
 using MegaCrit.Sts2.Core.Combat;
@@ -66,7 +67,7 @@ public sealed class SlimeBoss : CustomMonsterModel
     private void OnDeath(Creature _)
     {
         Creature.Died -= OnDeath;
-        ModAudio.Play("slime_boss", "death");
+        AFTPModAudio.Play("slime_boss", "death");
       //  NGame.Instance?.ScreenShake(ShakeStrength.TooMuch, ShakeDuration.Long);
     }
     
@@ -126,7 +127,7 @@ public sealed class SlimeBoss : CustomMonsterModel
     private async Task GoopSpray(IReadOnlyList<Creature> targets)
     {
         await FastAttackAnimation.Play(Creature);
-        ModAudio.Play("general", "slime_attack");
+        AFTPModAudio.Play("general", "slime_attack");
 
         try
         {
@@ -153,11 +154,13 @@ public sealed class SlimeBoss : CustomMonsterModel
         
         foreach (var target in targets.Where(t => t.IsAlive))
         {
-            var targetNode = NCombatRoom.Instance?.GetCreatureNode(target);
-            if (targetNode != null)
-            {
-              //  VfxCmd.Play("vfx/vfx_weighty_impact_green", targetNode.Position);
-            }
+            var creatureNode = target.GetCreatureNode();
+            if (creatureNode == null) continue;
+    
+            var vfx = PreloadManager.Cache.GetScene(SceneHelper.GetScenePath("vfx/vfx_heavy_blunt")).Instantiate<Node2D>();
+            vfx.Modulate = Colors.Green;
+            target.GetVfxContainer()?.AddChildSafely(vfx);
+            vfx.GlobalPosition = creatureNode.GlobalPosition;
         }
         
         await Cmd.Wait(0.4f);
@@ -176,7 +179,7 @@ public sealed class SlimeBoss : CustomMonsterModel
 
     _ = ShakeAnimation.Play(Creature, 1.0f, 3.0f);
     await Cmd.Wait(1.0f);
-    ModAudio.Play("general", "slime_split");
+    AFTPModAudio.Play("general", "slime_split");
     await CreatureCmd.Kill(Creature);
 
     var occupiedSlots = combatState.GetTeammatesOf(Creature)
@@ -238,7 +241,7 @@ public sealed class SlimeBoss : CustomMonsterModel
             0 => "slime_boss_talk_1",
             _ => "slime_boss_talk_2"
         };
-        ModAudio.Play("slime_boss", sfxName);
+        AFTPModAudio.Play("slime_boss", sfxName);
     }
     
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

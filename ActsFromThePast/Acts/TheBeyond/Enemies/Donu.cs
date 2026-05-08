@@ -71,7 +71,7 @@ public sealed class Donu : CustomMonsterModel
 
     private async Task CircleOfProtection(IReadOnlyList<Creature> targets)
     {
-        ModAudio.Play("donu", "donu_defense");
+        AFTPModAudio.Play("donu", "donu_defense");
 
         var teammates = CombatState.GetTeammatesOf(Creature);
         foreach (var teammate in teammates)

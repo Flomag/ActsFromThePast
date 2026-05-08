@@ -37,7 +37,7 @@ public sealed class ShiningLight : CustomEventModel
 
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "shining_light");
+        AFTPModAudio.Play("events", "shining_light");
     }
 
     private bool HasUpgradableCards()

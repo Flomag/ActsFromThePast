@@ -1,4 +1,5 @@
-﻿using BaseLib.Abstracts;
+﻿using ActsFromThePast.Interfaces;
+using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Gold;
 using MegaCrit.Sts2.Core.Events;
@@ -11,7 +12,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace ActsFromThePast.SharedEvents;
 
-public sealed class TheWomanInBlue : CustomEventModel
+public sealed class TheWomanInBlue : CustomEventModel, IShrineEvent
 {
     private const int Cost1 = 20;
     private const int Cost2 = 30;
@@ -19,6 +20,8 @@ public sealed class TheWomanInBlue : CustomEventModel
     private const decimal PunchDmgPercent = 0.05M;
 
     public override ActModel[] Acts => Array.Empty<ActModel>();
+    
+    bool IShrineEvent.IsOneTimeEvent => true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
     {

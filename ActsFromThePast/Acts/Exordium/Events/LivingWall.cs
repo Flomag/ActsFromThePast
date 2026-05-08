@@ -21,7 +21,7 @@ public sealed class LivingWall : CustomEventModel
 
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "living_wall");
+        AFTPModAudio.Play("events", "living_wall");
     }
 
     private bool HasUpgradableCards()

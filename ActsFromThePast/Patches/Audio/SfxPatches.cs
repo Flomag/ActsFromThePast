@@ -17,7 +17,7 @@ public class SfxPatches
         {
             if (__instance is ConfusedPower && applier?.Monster is Snecko)
             {
-                ModAudio.Play("snecko", "confusion_applied");
+                AFTPModAudio.Play("snecko", "confusion_applied");
             }
         }
     }

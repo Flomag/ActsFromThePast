@@ -23,6 +23,8 @@ public sealed class Necronomicurse : CustomCardModel
     }
     
     public override bool CanBeGeneratedByModifiers => false;
+    
+    public override int MaxUpgradeLevel => 0;
 
     public override IEnumerable<CardKeyword> CanonicalKeywords
     {
@@ -52,8 +54,9 @@ public sealed class Necronomicurse : CustomCardModel
         necronomicon?.Flash();
         await CardPileCmd.Add(this, PileType.Hand);
     }
-
-    protected override void OnUpgrade()
+    
+    public override void AfterTransformedTo()
     {
+        AFTPModAudio.Play("relics", "necronomicon");
     }
 }

@@ -53,7 +53,7 @@ public sealed class Mystic : CustomMonsterModel
             1 => "mystic_death_2",
             _ => "mystic_death_3"
         };
-        ModAudio.Play("mystic", sfxName);
+        AFTPModAudio.Play("mystic", sfxName);
     }
 
     private void PlayTurnSfx()
@@ -64,7 +64,7 @@ public sealed class Mystic : CustomMonsterModel
             0 => "mystic_talk_1",
             _ => "mystic_talk_2"
         };
-        ModAudio.Play("mystic", sfxName);
+        AFTPModAudio.Play("mystic", sfxName);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()

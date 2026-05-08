@@ -1,4 +1,5 @@
-﻿using ActsFromThePast.Relics;
+﻿using ActsFromThePast.Interfaces;
+using ActsFromThePast.Relics;
 using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
@@ -8,12 +9,14 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace ActsFromThePast.SharedEvents;
 
-public sealed class BonfireSpirits : CustomEventModel
+public sealed class BonfireSpirits : CustomEventModel, IShrineEvent
 {
     private const int CommonHeal = 5;
     private const int RareMaxHpGain = 10;
 
     public override ActModel[] Acts => Array.Empty<ActModel>();
+    
+    bool IShrineEvent.IsOneTimeEvent => true;
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
@@ -22,7 +25,7 @@ public sealed class BonfireSpirits : CustomEventModel
     
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "goop");
+        AFTPModAudio.Play("events", "goop");
     }
 
     private Task Continue()

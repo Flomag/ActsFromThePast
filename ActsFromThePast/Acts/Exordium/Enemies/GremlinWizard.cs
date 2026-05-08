@@ -107,7 +107,7 @@ public sealed class GremlinWizard : CustomMonsterModel
             0 => "gremlin_wizard_talk_1",
             _ => "gremlin_wizard_talk_2"
         };
-        ModAudio.Play("gremlin_wizard", sfxName);
+        AFTPModAudio.Play("gremlin_wizard", sfxName);
     }
 
     public override async Task AfterAddedToRoom()
@@ -132,7 +132,7 @@ public sealed class GremlinWizard : CustomMonsterModel
             1 => "gremlin_wizard_death_2",
             _ => "gremlin_wizard_death_3"
         };
-        ModAudio.Play("gremlin_wizard", sfxName);
+        AFTPModAudio.Play("gremlin_wizard", sfxName);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

@@ -254,7 +254,7 @@ public sealed class Darkling : CustomMonsterModel
     {
         var roll = Rng.Chaotic.NextInt(2);
         var sfxName = roll == 0 ? "darkling_regrow_1" : "darkling_regrow_2";
-        ModAudio.Play("darkling", sfxName);
+        AFTPModAudio.Play("darkling", sfxName);
 
         var regrowPower = Creature.Powers.OfType<LifeLinkPower>().FirstOrDefault();
         if (regrowPower != null)

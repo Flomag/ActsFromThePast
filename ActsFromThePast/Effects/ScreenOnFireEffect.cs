@@ -28,7 +28,7 @@ public partial class ScreenOnFireEffect : NSts1Effect
         if (!_playedInitialEffects)
         {
             _playedInitialEffects = true;
-            ModAudio.Play("hexaghost", "ghost_flames");
+            AFTPModAudio.Play("hexaghost", "ghost_flames");
             BorderFlashEffect.PlayFire();
         }
 

@@ -117,11 +117,11 @@ public partial class InteractableTorchEffect : Control
 
                 if (_activated)
                 {
-                    ModAudio.Play("general", "fire_ignite", -10f, 0.4f);
+                    AFTPModAudio.Play("general", "fire_ignite", -10f, 0.4f);
                 }
                 else
                 {
-                    ModAudio.Play("general", "torch_extinguish", -10f);
+                    AFTPModAudio.Play("general", "torch_extinguish", -10f);
                 }
             }
         }

@@ -1,17 +1,30 @@
-﻿using BaseLib.Abstracts;
+﻿using ActsFromThePast.Interfaces;
+using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Extensions;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Runs;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace ActsFromThePast.SharedEvents;
 
-public sealed class Duplicator : CustomEventModel
+public sealed class Duplicator : CustomEventModel, IShrineEvent
 {
     public override ActModel[] Acts => Array.Empty<ActModel>();
+    
+    bool IShrineEvent.IsOneTimeEvent => true;
+    
+    private const int KneelDamage = 5;
+
+    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
+    {
+        new IntVar("KneelDamage", KneelDamage)
+    };
     
     public override bool IsAllowed(IRunState runState)
     {
@@ -29,7 +42,7 @@ public sealed class Duplicator : CustomEventModel
             return new[]
             {
                 Option(Pray),
-                Option(Kneel, "INITIAL_REBALANCED")
+                Option(Kneel, "INITIAL_REBALANCED").ThatDoesDamage(KneelDamage)
             };
         }
         return new[]
@@ -58,19 +71,24 @@ public sealed class Duplicator : CustomEventModel
     
     private async Task Kneel()
     {
+        await CreatureCmd.Damage(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            KneelDamage,
+            ValueProp.Unblockable | ValueProp.Unpowered,
+            null, null);
+
         var upgraded = Owner.Deck.Cards
             .Where(c => c.IsUpgraded)
             .ToList()
             .StableShuffle(Owner.RunState.Rng.Niche)
             .Take(2)
             .ToList();
-
         foreach (var card in upgraded)
         {
             CardCmd.PreviewCardPileAdd(
                 await CardPileCmd.Add(Owner.RunState.CloneCard(card), PileType.Deck));
         }
-
         SetEventFinished(PageDescription("PRAY"));
     }
 }

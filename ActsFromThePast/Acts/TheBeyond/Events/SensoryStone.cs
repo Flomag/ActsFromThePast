@@ -30,7 +30,7 @@ public sealed class SensoryStone : CustomEventModel
 
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "sensory_stone");
+        AFTPModAudio.Play("events", "sensory_stone");
     }
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()

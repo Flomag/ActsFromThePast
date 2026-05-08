@@ -1,4 +1,5 @@
-﻿using ActsFromThePast.Minigames;
+﻿using ActsFromThePast.Interfaces;
+using ActsFromThePast.Minigames;
 using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -8,7 +9,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace ActsFromThePast.SharedEvents;
 
-public sealed class MatchAndKeep : CustomEventModel
+public sealed class MatchAndKeep : CustomEventModel, IShrineEvent
 {
     private const int Attempts = 5;
 

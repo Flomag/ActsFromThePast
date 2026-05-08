@@ -124,7 +124,7 @@ public sealed class Maw : CustomMonsterModel
 
     private async Task Roar(IReadOnlyList<Creature> targets)
     {
-        ModAudio.Play("maw", "maw_death", pitchVariation: 0.1f);
+        AFTPModAudio.Play("maw", "maw_death", pitchVariation: 0.1f);
         TalkCmd.Play(_roarDialog, Creature, VfxColor.Blue, VfxDuration.Long);
         await Cmd.Wait(0.05f);
         foreach (var target in targets.Where(t => t.IsAlive))
@@ -177,7 +177,7 @@ public sealed class Maw : CustomMonsterModel
         await base.BeforeDeath(creature);
         if (creature != Creature)
             return;
-        ModAudio.Play("maw", "maw_death");
+        AFTPModAudio.Play("maw", "maw_death");
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

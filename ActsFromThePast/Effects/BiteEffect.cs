@@ -81,7 +81,7 @@ public partial class BiteEffect : NSts1Effect
         if (Duration < StartingDuration - 0.3f && !_playedSfx)
         {
             _playedSfx = true;
-            ModAudio.Play("general", "bite", 0f, 0.05f);
+            AFTPModAudio.Play("general", "bite", 0f, 0.05f);
         }
         
         if (Duration < 0f)

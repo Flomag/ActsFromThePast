@@ -61,7 +61,9 @@ public sealed class Mugger : CustomMonsterModel
         {
             foreach (var thievery in Creature.GetPowerInstances<ThieveryPower>())
             {
-                currentRoom.AddExtraReward(thievery.Target.Player, (Reward)new GoldReward(thievery.Amount, thievery.Target.Player, true));
+                var stolenGold = thievery.DynamicVars.Gold.IntValue;
+                if (stolenGold > 0)
+                    currentRoom.AddExtraReward(thievery.Target.Player, (Reward)new GoldReward(stolenGold, thievery.Target.Player, true));
             }
         }
 
@@ -76,7 +78,7 @@ public sealed class Mugger : CustomMonsterModel
             0 => "mugger_death_1",
             _ => "mugger_death_2"
         };
-        ModAudio.Play("mugger", sfxName);
+        AFTPModAudio.Play("mugger", sfxName);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -211,7 +213,7 @@ public sealed class Mugger : CustomMonsterModel
             0 => "mugger_talk_1",
             _ => "mugger_talk_2"
         };
-        ModAudio.Play("mugger", sfxName);
+        AFTPModAudio.Play("mugger", sfxName);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

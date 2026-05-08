@@ -100,7 +100,7 @@ public partial class CollectorStakeEffect : NSts1Effect
         {
             IsDone = true;
             NGame.Instance?.ScreenShake(ShakeStrength.Medium, ShakeDuration.Short);
-            ModAudio.Play("general", "attack_fast");
+            AFTPModAudio.Play("general", "attack_fast");
             return;
         }
 

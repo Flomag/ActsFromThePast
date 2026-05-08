@@ -36,7 +36,7 @@ public sealed class WorldOfGoop : CustomEventModel
 
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "spirits");
+        AFTPModAudio.Play("events", "spirits");
     }
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()

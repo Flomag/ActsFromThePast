@@ -47,14 +47,14 @@ public sealed class Necronomicon : CustomRelicModel
 
     public override async Task AfterObtained()
     {
-        ModAudio.Play("relics", "necronomicon");
+        AFTPModAudio.Play("relics", "necronomicon");
 
         // Add Necronomicurse to deck when obtained
         var curse = Owner.RunState.CreateCard(ModelDb.Card<Necronomicurse>(), Owner);
         var result = await CardPileCmd.Add(curse, PileType.Deck);
         CardCmd.PreviewCardPileAdd(result, 2f);
     }
-
+    
     public override Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
         if (player != Owner)

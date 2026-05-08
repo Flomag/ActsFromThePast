@@ -187,7 +187,7 @@ private async Task Split(IReadOnlyList<Creature> targets)
 
     _ = ShakeAnimation.Play(Creature, 1.0f, 3.0f);
     await Cmd.Wait(1.0f);
-    ModAudio.Play("general", "slime_split");
+    AFTPModAudio.Play("general", "slime_split");
     await CreatureCmd.Kill(Creature);
 
     var occupiedSlots = combatState.GetTeammatesOf(Creature)

@@ -160,7 +160,7 @@ public sealed class GremlinNob : CustomMonsterModel
             1 => "bellow_2",
             _ => "bellow_3"
         };
-        ModAudio.Play("gremlin_nob", sfxName);
+        AFTPModAudio.Play("gremlin_nob", sfxName);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

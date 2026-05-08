@@ -12,6 +12,14 @@ public sealed class MindBloomSlimeBoss : CustomEncounterModel
     
     public override bool IsValidForAct(ActModel act) => false;
 
+    public override bool HasScene => true;
+
+    public override IReadOnlyList<string> Slots => new[]
+    {
+        "spike_med_1", "spike_large", "spike_med_2",
+        "acid_med_1", "slime_boss", "acid_large", "acid_med_2"
+    };
+
     public override IEnumerable<MonsterModel> AllPossibleMonsters
     {
         get
@@ -19,8 +27,10 @@ public sealed class MindBloomSlimeBoss : CustomEncounterModel
             return new List<MonsterModel>
             {
                 ModelDb.Monster<SlimeBoss>(),
+                ModelDb.Monster<SpikeSlimeLarge>(),
+                ModelDb.Monster<SpikeSlimeMedium>(),
                 ModelDb.Monster<AcidSlimeLarge>(),
-                ModelDb.Monster<SpikeSlimeLarge>()
+                ModelDb.Monster<AcidSlimeMedium>(),
             };
         }
     }
@@ -29,7 +39,7 @@ public sealed class MindBloomSlimeBoss : CustomEncounterModel
     {
         return new List<(MonsterModel, string?)>
         {
-            (ModelDb.Monster<SlimeBoss>().ToMutable(), null)
+            (ModelDb.Monster<SlimeBoss>().ToMutable(), "slime_boss")
         };
     }
 }

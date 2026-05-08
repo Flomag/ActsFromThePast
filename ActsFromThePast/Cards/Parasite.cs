@@ -41,6 +41,6 @@ public sealed class Parasite : CustomCardModel
             return;
 
         await CreatureCmd.LoseMaxHp(new ThrowingPlayerChoiceContext(), Owner.Creature, 3, false);
-        ModAudio.Play("general", "blood_swish");
+        AFTPModAudio.Play("general", "blood_swish");
     }
 }

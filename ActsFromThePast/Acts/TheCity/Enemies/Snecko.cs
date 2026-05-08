@@ -42,7 +42,7 @@ public sealed class Snecko : CustomMonsterModel
         await base.BeforeDeath(creature);
         if (creature != Creature)
             return;
-        ModAudio.Play("snecko", "snecko_death");
+        AFTPModAudio.Play("snecko", "snecko_death");
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -96,7 +96,7 @@ public sealed class Snecko : CustomMonsterModel
             effect.GlobalPosition = position;
         }
 
-        ModAudio.Play(Creature, "snecko", "snecko_glare");
+        AFTPModAudio.Play(Creature, "snecko", "snecko_glare");
         NGame.Instance?.ScreenShake(ShakeStrength.Weak, ShakeDuration.Long);
         await Cmd.Wait(1.5f);
 

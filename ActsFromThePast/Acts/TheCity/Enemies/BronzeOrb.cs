@@ -186,7 +186,7 @@ public sealed class BronzeOrb : CustomMonsterModel
     private async Task BeamMove(IReadOnlyList<Creature> targets)
     {
         BorderFlashEffect.PlaySky();
-        ModAudio.Play("general", "magic_beam_short", -6f);
+        AFTPModAudio.Play("general", "magic_beam_short", -6f);
 
         var target = targets.FirstOrDefault(t => t.IsAlive);
         var targetPos = target != null
@@ -211,7 +211,7 @@ public sealed class BronzeOrb : CustomMonsterModel
         if (automaton == null)
             return;
 
-        ModAudio.Play("general", "magic_beam_short", -6f);
+        AFTPModAudio.Play("general", "magic_beam_short", -6f);
 
         var orbPos = Sts1VfxHelper.GetCreatureCenter(Creature);
         var automatonPos = Sts1VfxHelper.GetCreatureCenter(automaton);

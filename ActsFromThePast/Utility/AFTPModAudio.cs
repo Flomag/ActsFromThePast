@@ -8,8 +8,11 @@ using MegaCrit.Sts2.Core.Saves;
 
 namespace ActsFromThePast;
 
-public static class ModAudio
+public static class AFTPModAudio
 {
+    
+    // Using my own audio implementation for now since BaseLib doesn't offer things like fade support
+    
     private static readonly Dictionary<string, AudioStream> CachedStreams = new();
     private static AudioStreamPlayer? _musicPlayer;
     private static string? _currentMusicPath;

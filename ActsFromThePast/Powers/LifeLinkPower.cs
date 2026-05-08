@@ -40,7 +40,6 @@ public sealed class LifeLinkPower : CustomPowerModel
     {
         if (wasRemovalPrevented || Owner != creature)
             return;
-
         if (!AreAllOtherDarklingsDead() || !Owner.IsDead)
         {
             GetInternalData<Data>().isReviving = true;
@@ -49,6 +48,48 @@ public sealed class LifeLinkPower : CustomPowerModel
             await CreatureCmd.TriggerAnim(Owner, "Dead", 0.0f);
             NCombatRoom.Instance?.SetCreatureIsInteractable(Owner, false);
         }
+        else
+        {
+            await Cmd.Wait(0.25f, true);
+            DoFadeOutOnAllDarklings();
+        }
+    }
+    
+    private void DoFadeOutOnAllDarklings()
+    {
+        var nodes = new List<NCreature>();
+        foreach (var enemy in CombatState.Enemies)
+        {
+            var creatureNode = NCombatRoom.Instance?.GetCreatureNode(enemy);
+            if (creatureNode != null)
+            {
+                creatureNode.AnimHideIntent();
+                nodes.Add(creatureNode);
+            }
+        }
+
+        var vfx = NMonsterDeathVfx.Create(nodes);
+        if (vfx == null || nodes.Count <= 0)
+            return;
+
+        var parent = nodes[0].GetParent();
+        parent.AddChildSafely(vfx);
+        parent.MoveChildSafely(vfx, nodes[0].GetIndex());
+
+        var task = TaskHelper.RunSafely(PlayVfxAndRemoveNodes(vfx, nodes));
+        foreach (var node in nodes)
+        {
+            node.DeathAnimationTask = task;
+            NCombatRoom.Instance?.RemoveCreatureNode(node);
+        }
+    }
+
+    private async Task PlayVfxAndRemoveNodes(NMonsterDeathVfx vfx, List<NCreature> nodes)
+    {
+        await Cmd.Wait(0.25f, true);
+        await vfx.PlayVfx();
+        foreach (var node in nodes)
+            node.QueueFreeSafely();
     }
 
     public override bool ShouldAllowHitting(Creature creature)

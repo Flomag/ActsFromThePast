@@ -1,4 +1,5 @@
-﻿using ActsFromThePast.Minigames;
+﻿using ActsFromThePast.Interfaces;
+using ActsFromThePast.Minigames;
 using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
@@ -13,7 +14,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace ActsFromThePast.SharedEvents;
 
-public sealed class WheelOfChange : CustomEventModel
+public sealed class WheelOfChange : CustomEventModel, IShrineEvent
 {
     private const decimal HpLossPercent = 0.15M;
 

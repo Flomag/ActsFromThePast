@@ -47,7 +47,7 @@ public sealed class Centurion : CustomMonsterModel
             0 => "centurion_talk_1",
             _ => "centurion_talk_2"
         };
-        ModAudio.Play("centurion", sfxName);
+        AFTPModAudio.Play("centurion", sfxName);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()

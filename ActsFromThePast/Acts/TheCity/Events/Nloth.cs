@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using ActsFromThePast.Interfaces;
 using ActsFromThePast.Relics;
 using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.CardSelection;
@@ -17,13 +18,15 @@ using MegaCrit.Sts2.Core.Runs;
 
 namespace ActsFromThePast.Acts.TheCity.Events;
 
-public sealed class Nloth : CustomEventModel
+public sealed class Nloth : CustomEventModel, IShrineEvent
 {
     private const string _choice1RelicKey = "Choice1Relic";
     private const string _choice2RelicKey = "Choice2Relic";
     private IReadOnlyList<RelicModel>? _choiceRelics;
 
     public override ActModel[] Acts => new[] { ModelDb.Act<TheCityAct>() };
+    
+    bool IShrineEvent.IsOneTimeEvent => true;
 
     public override bool IsAllowed(IRunState runState)
     {
@@ -66,7 +69,7 @@ public sealed class Nloth : CustomEventModel
 
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "ssserpent");
+        AFTPModAudio.Play("events", "ssserpent");
     }
     
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()

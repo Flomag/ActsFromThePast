@@ -87,7 +87,7 @@ public sealed class GremlinFat : CustomMonsterModel
             1 => "gremlin_fat_death_2",
             _ => "gremlin_fat_death_3"
         };
-        ModAudio.Play("gremlin_fat", sfxName);
+        AFTPModAudio.Play("gremlin_fat", sfxName);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

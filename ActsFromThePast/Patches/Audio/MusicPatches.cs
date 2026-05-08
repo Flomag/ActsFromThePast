@@ -241,7 +241,7 @@ public class MusicPatches
         public static void OnHexaghostActivated()
         {
             _hexaghostActivated = true;
-            ModAudio.FadeIn(ExordiumBossTracks, 1f);
+            AFTPModAudio.FadeIn(ExordiumBossTracks, 1f);
             _isPlayingLegacyMusic = true;
             _currentTrackType = TrackType.Boss;
         }
@@ -304,8 +304,8 @@ public static bool UpdateMusic_Prefix(NRunMusicController __instance)
     {
         if (_isPlayingLegacyMusic)
         {
-            ModAudio.StopMusic();
-            ModAudio.StopAmbience();
+            AFTPModAudio.StopMusic();
+            AFTPModAudio.StopAmbience();
             _isPlayingLegacyMusic = false;
             _currentTrackType = TrackType.None;
             _playingBossStinger = false;
@@ -317,8 +317,8 @@ public static bool UpdateMusic_Prefix(NRunMusicController __instance)
     {
         if (_isPlayingLegacyMusic)
         {
-            ModAudio.StopMusic();
-            ModAudio.StopAmbience();
+            AFTPModAudio.StopMusic();
+            AFTPModAudio.StopAmbience();
             _isPlayingLegacyMusic = false;
             _currentTrackType = TrackType.None;
             _playingBossStinger = false;
@@ -328,7 +328,7 @@ public static bool UpdateMusic_Prefix(NRunMusicController __instance)
     _playingBossStinger = false;
     ResetHexaghostState();
     __instance.StopMusic();
-    ModAudio.FadeIn(GetExplorationTracks(), 1.0f);
+    AFTPModAudio.FadeIn(GetExplorationTracks(), 1.0f);
     _isPlayingLegacyMusic = true;
     _currentTrackType = TrackType.Exploration;
     __instance.UpdateAmbience();
@@ -344,8 +344,8 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
     {
         if (_isPlayingLegacyMusic)
         {
-            ModAudio.StopMusic();
-            ModAudio.StopAmbience();
+            AFTPModAudio.StopMusic();
+            AFTPModAudio.StopAmbience();
             _isPlayingLegacyMusic = false;
             _currentTrackType = TrackType.None;
             _playingBossStinger = false;
@@ -357,8 +357,8 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
     {
         if (_isPlayingLegacyMusic)
         {
-            ModAudio.StopMusic();
-            ModAudio.StopAmbience();
+            AFTPModAudio.StopMusic();
+            AFTPModAudio.StopAmbience();
             _isPlayingLegacyMusic = false;
             _currentTrackType = TrackType.None;
             _playingBossStinger = false;
@@ -376,7 +376,7 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
         if (_playingBossStinger || _isPlayingLegacyMusic)
         {
             _playingBossStinger = false;
-            ModAudio.FadeOut(1f);
+            AFTPModAudio.FadeOut(1f);
             _isPlayingLegacyMusic = false;
             _currentTrackType = TrackType.None;
             StartBaseGameMusic(__instance, specialProgress.Value, 1f);
@@ -398,15 +398,15 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
         if (!combatInProgress2)
         {
             StopBaseGameMusic(__instance);
-            ModAudio.StopMusic();
-            ModAudio.StopAmbience();
+            AFTPModAudio.StopMusic();
+            AFTPModAudio.StopAmbience();
             LegacyBossHelper.OnBossVictory();
             return false;
         }
         if (!_isPlayingLegacyMusic || _currentTrackType != TrackType.Elite)
         {
             StopBaseGameMusic(__instance);
-            ModAudio.FadeIn(new[] { "mind_bloom" }, 1f);
+            AFTPModAudio.FadeIn(new[] { "mind_bloom" }, 1f);
             _isPlayingLegacyMusic = true;
             _currentTrackType = TrackType.Elite;
         }
@@ -420,7 +420,7 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
         {
             if (_isPlayingLegacyMusic)
             {
-                ModAudio.FadeOut(0.5f);
+                AFTPModAudio.FadeOut(0.5f);
                 _isPlayingLegacyMusic = false;
                 _currentTrackType = TrackType.None;
             }
@@ -430,7 +430,7 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
         if (!_isPlayingLegacyMusic || _currentTrackType != TrackType.Boss)
         {
             StopBaseGameMusic(__instance);
-            ModAudio.FadeIn(GetBossTracks(), 1f);
+            AFTPModAudio.FadeIn(GetBossTracks(), 1f);
             _isPlayingLegacyMusic = true;
             _currentTrackType = TrackType.Boss;
         }
@@ -441,7 +441,7 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
     if (IsBossRoom() && !combatInProgress2)
     {
         StopBaseGameMusic(__instance);
-        ModAudio.PlayBossStinger();
+        AFTPModAudio.PlayBossStinger();
         SetBossStingerState();
         return false;
     }
@@ -454,7 +454,7 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
             if (!_isPlayingLegacyMusic || _currentTrackType != TrackType.Exploration)
             {
                 StopBaseGameMusic(__instance);
-                ModAudio.FadeIn(GetExplorationTracks(), 1f);
+                AFTPModAudio.FadeIn(GetExplorationTracks(), 1f);
                 _isPlayingLegacyMusic = true;
                 _currentTrackType = TrackType.Exploration;
             }
@@ -463,7 +463,7 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
         if (!_isPlayingLegacyMusic || _currentTrackType != TrackType.Elite)
         {
             StopBaseGameMusic(__instance);
-            ModAudio.FadeIn(GetEliteTracks(), 1f);
+            AFTPModAudio.FadeIn(GetEliteTracks(), 1f);
             _isPlayingLegacyMusic = true;
             _currentTrackType = TrackType.Elite;
         }
@@ -478,7 +478,7 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
             if (!_isPlayingLegacyMusic || _currentTrackType != TrackType.Exploration)
             {
                 StopBaseGameMusic(__instance);
-                ModAudio.FadeIn(GetExplorationTracks(), 1f);
+                AFTPModAudio.FadeIn(GetExplorationTracks(), 1f);
                 _isPlayingLegacyMusic = true;
                 _currentTrackType = TrackType.Exploration;
             }
@@ -487,7 +487,7 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
         if (!_isPlayingLegacyMusic || _currentTrackType != TrackType.Elite)
         {
             StopBaseGameMusic(__instance);
-            ModAudio.FadeIn(GetEliteTracks(), 1f);
+            AFTPModAudio.FadeIn(GetEliteTracks(), 1f);
             _isPlayingLegacyMusic = true;
             _currentTrackType = TrackType.Elite;
         }
@@ -502,7 +502,7 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
             if (!_isPlayingLegacyMusic || _currentTrackType != TrackType.Exploration)
             {
                 StopBaseGameMusic(__instance);
-                ModAudio.FadeIn(GetExplorationTracks(), 1f);
+                AFTPModAudio.FadeIn(GetExplorationTracks(), 1f);
                 _isPlayingLegacyMusic = true;
                 _currentTrackType = TrackType.Exploration;
             }
@@ -511,7 +511,7 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
         if (!_isPlayingLegacyMusic || _currentTrackType != TrackType.Elite)
         {
             StopBaseGameMusic(__instance);
-            ModAudio.FadeIn(GetEliteTracks(), 1f);
+            AFTPModAudio.FadeIn(GetEliteTracks(), 1f);
             _isPlayingLegacyMusic = true;
             _currentTrackType = TrackType.Elite;
         }
@@ -524,7 +524,7 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
         if (!_isPlayingLegacyMusic || _currentTrackType != TrackType.Shrine)
         {
             StopBaseGameMusic(__instance);
-            ModAudio.FadeIn(new[] { "shrine" }, 1f);
+            AFTPModAudio.FadeIn(new[] { "shrine" }, 1f);
             _isPlayingLegacyMusic = true;
             _currentTrackType = TrackType.Shrine;
         }
@@ -535,7 +535,7 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
     if (!_isPlayingLegacyMusic || _currentTrackType != TrackType.Exploration)
     {
         StopBaseGameMusic(__instance);
-        ModAudio.FadeIn(GetExplorationTracks(), 1f);
+        AFTPModAudio.FadeIn(GetExplorationTracks(), 1f);
         _isPlayingLegacyMusic = true;
         _currentTrackType = TrackType.Exploration;
     }
@@ -579,8 +579,8 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
         [HarmonyPostfix]
         public static void StopMusic_Postfix(NRunMusicController __instance)
         {
-            ModAudio.StopMusic();
-            ModAudio.StopAmbience();
+            AFTPModAudio.StopMusic();
+            AFTPModAudio.StopAmbience();
             StopBaseGameMusic(__instance);
             _isPlayingLegacyMusic = false;
             _currentTrackType = TrackType.None;
@@ -594,7 +594,7 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
             {
                 if (_isPlayingLegacyMusic)
                 {
-                    ModAudio.StopAmbience();
+                    AFTPModAudio.StopAmbience();
                 }
                 return true;
             }
@@ -602,22 +602,22 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
             var combatInProgress = CombatManager.Instance?.IsInProgress ?? false;
             if (IsMindBloomEncounter() && !combatInProgress && !_playingBossStinger)
             {
-                ModAudio.StopMusic();
-                ModAudio.StopAmbience();
-                ModAudio.PlayBossStinger(1.5f);
+                AFTPModAudio.StopMusic();
+                AFTPModAudio.StopAmbience();
+                AFTPModAudio.PlayBossStinger(1.5f);
                 SetBossStingerState();
                 return false;
             }
             if (IsBossRoom() && !combatInProgress && !_playingBossStinger)
             {
-                ModAudio.StopMusic();
-                ModAudio.StopAmbience();
-                ModAudio.PlayBossStinger(1.5f);
+                AFTPModAudio.StopMusic();
+                AFTPModAudio.StopAmbience();
+                AFTPModAudio.PlayBossStinger(1.5f);
                 SetBossStingerState();
                 return false;
             }
 
-            ModAudio.FadeInAmbience(GetAmbienceTrack(), 1f);
+            AFTPModAudio.FadeInAmbience(GetAmbienceTrack(), 1f);
             return false;
         }
         
@@ -641,7 +641,7 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
     {
         public static void Postfix(float volume)
         {
-            ModAudio.SetMusicVolume(volume);
+            AFTPModAudio.SetMusicVolume(volume);
         }
     }
 
@@ -650,7 +650,7 @@ public static bool UpdateTrack_Prefix(NRunMusicController __instance)
     {
         public static void Postfix(float volume)
         {
-            ModAudio.SetAmbienceVolume(volume);
+            AFTPModAudio.SetAmbienceVolume(volume);
         }
     }
     

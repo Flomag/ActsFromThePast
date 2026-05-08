@@ -36,7 +36,7 @@ public partial class CollectorCurseEffect : NSts1Effect
         {
             if (_count == 13)
             {
-                ModAudio.Play("collector", "collector_heavy_attack");
+                AFTPModAudio.Play("collector", "collector_heavy_attack");
                 RoomTintEffect.Play();
                 BorderFlashEffect.Play(new Color(1.0f, 0.0f, 1.0f, 0.7f));
             }

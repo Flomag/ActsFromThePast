@@ -41,7 +41,7 @@ public sealed class SporeCloudPower : CustomPowerModel
             return;
 
         Flash();
-        ModAudio.Play("fungi_beast", "spore_cloud_release");
+        AFTPModAudio.Play("fungi_beast", "spore_cloud_release");
 
         foreach (var player in players)
         {

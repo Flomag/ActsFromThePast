@@ -55,11 +55,11 @@ public sealed class CursedTome : CustomEventModel
         {
             return new[]
             {
-                Option(Read, "INITIAL_REBALANCED"),
+                Option(Read, "INITIAL_REBALANCED").ThatDoesDamage(DmgRebalanced),
                 PullAwayOption()
             };
         }
-
+        
         return new[]
         {
             Option(Read),
@@ -109,7 +109,7 @@ public sealed class CursedTome : CustomEventModel
 
     private async Task Read()
     {
-        ModAudio.Play("events", "cursed_tome");
+        AFTPModAudio.Play("events", "cursed_tome");
         if (ActsFromThePastConfig.RebalancedMode)
         {
             await CreatureCmd.Damage(
@@ -123,7 +123,7 @@ public sealed class CursedTome : CustomEventModel
             {
                 new EventOption(this, Page1Continue,
                     $"{Id.Entry}.pages.ALL.options.CONTINUE_REBALANCED",
-                    Array.Empty<IHoverTip>()),
+                    Array.Empty<IHoverTip>()).ThatDoesDamage(DmgRebalanced),
                 PullAwayOption()
             });
         }
@@ -133,14 +133,14 @@ public sealed class CursedTome : CustomEventModel
             {
                 new EventOption(this, Page1Continue,
                     $"{Id.Entry}.pages.PAGE_1.options.CONTINUE",
-                    Array.Empty<IHoverTip>())
+                    Array.Empty<IHoverTip>()).ThatDoesDamage(DmgPage1)
             });
         }
     }
 
     private async Task Page1Continue()
     {
-        ModAudio.Play("events", "cursed_tome");
+        AFTPModAudio.Play("events", "cursed_tome");
         await CreatureCmd.Damage(
             new ThrowingPlayerChoiceContext(),
             Owner.Creature,
@@ -155,7 +155,7 @@ public sealed class CursedTome : CustomEventModel
             {
                 new EventOption(this, Page2Continue,
                     $"{Id.Entry}.pages.ALL.options.CONTINUE_REBALANCED",
-                    Array.Empty<IHoverTip>()),
+                    Array.Empty<IHoverTip>()).ThatDoesDamage(DmgRebalanced),
                 PullAwayOption()
             });
         }
@@ -165,14 +165,14 @@ public sealed class CursedTome : CustomEventModel
             {
                 new EventOption(this, Page2Continue,
                     $"{Id.Entry}.pages.PAGE_2.options.CONTINUE",
-                    Array.Empty<IHoverTip>())
+                    Array.Empty<IHoverTip>()).ThatDoesDamage(DmgPage2)
             });
         }
     }
 
     private async Task Page2Continue()
     {
-        ModAudio.Play("events", "cursed_tome");
+        AFTPModAudio.Play("events", "cursed_tome");
         await CreatureCmd.Damage(
             new ThrowingPlayerChoiceContext(),
             Owner.Creature,
@@ -187,7 +187,7 @@ public sealed class CursedTome : CustomEventModel
             {
                 new EventOption(this, Page3Continue,
                     $"{Id.Entry}.pages.ALL.options.CONTINUE_REBALANCED",
-                    Array.Empty<IHoverTip>()),
+                    Array.Empty<IHoverTip>()).ThatDoesDamage(DmgRebalanced),
                 PullAwayOption()
             });
         }
@@ -197,14 +197,14 @@ public sealed class CursedTome : CustomEventModel
             {
                 new EventOption(this, Page3Continue,
                     $"{Id.Entry}.pages.PAGE_3.options.CONTINUE",
-                    Array.Empty<IHoverTip>())
+                    Array.Empty<IHoverTip>()).ThatDoesDamage(DmgPage3)
             });
         }
     }
 
     private async Task Page3Continue()
     {
-        ModAudio.Play("events", "cursed_tome");
+        AFTPModAudio.Play("events", "cursed_tome");
         await CreatureCmd.Damage(
             new ThrowingPlayerChoiceContext(),
             Owner.Creature,
@@ -217,7 +217,7 @@ public sealed class CursedTome : CustomEventModel
             AdvancePullAway();
             SetEventState(PageDescription("LAST_PAGE"), new[]
             {
-                Option(Obtain, "LAST_PAGE_REBALANCED"),
+                Option(Obtain, "LAST_PAGE_REBALANCED").ThatDoesDamage(DmgRebalanced),
                 PullAwayOption()
             });
         }
@@ -225,8 +225,8 @@ public sealed class CursedTome : CustomEventModel
         {
             SetEventState(PageDescription("LAST_PAGE"), new[]
             {
-                Option(Obtain, "LAST_PAGE"),
-                Option(Stop, "LAST_PAGE")
+                Option(Obtain, "LAST_PAGE").ThatDoesDamage(DmgObtain),
+                Option(Stop, "LAST_PAGE").ThatDoesDamage(DmgStop)
             });
         }
     }

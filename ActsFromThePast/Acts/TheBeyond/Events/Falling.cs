@@ -25,7 +25,7 @@ public sealed class Falling : CustomEventModel
 
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "falling");
+        AFTPModAudio.Play("events", "falling");
     }
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()

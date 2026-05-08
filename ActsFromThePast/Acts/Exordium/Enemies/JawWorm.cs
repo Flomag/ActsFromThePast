@@ -54,7 +54,7 @@ public sealed class JawWorm : CustomMonsterModel
     private void OnDeath(Creature _)
     {
         Creature.Died -= OnDeath;
-        ModAudio.Play("jaw_worm", "jaw_worm_death");
+        AFTPModAudio.Play("jaw_worm", "jaw_worm_death");
     }
     
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -159,14 +159,14 @@ public sealed class JawWorm : CustomMonsterModel
                 vfx.Modulate = new Color(0.3f, 0.5f, 0.7f, 1f);
                 return vfx;
             })
-            .BeforeDamage(async () => ModAudio.Play("general", "bite", 0f, 0.05f))
+            .BeforeDamage(async () => AFTPModAudio.Play("general", "bite", 0f, 0.05f))
             .Execute(null);
     }
     
     private async Task Bellow(IReadOnlyList<Creature> targets)
     {
         await CreatureCmd.TriggerAnim(Creature, "tailslam", 0.0f);
-        ModAudio.Play(Creature, "jaw_worm", "jaw_worm_bellow");
+        AFTPModAudio.Play(Creature, "jaw_worm", "jaw_worm_bellow");
         NGame.Instance?.ScreenShake(ShakeStrength.Medium, ShakeDuration.Short);
         await Cmd.Wait(0.5f);
         

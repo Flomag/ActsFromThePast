@@ -147,7 +147,7 @@ public sealed class Byrd : CustomMonsterModel
         await base.BeforeDeath(creature);
         if (creature != Creature)
             return;
-        ModAudio.Play("byrd", "byrd_death");
+        AFTPModAudio.Play("byrd", "byrd_death");
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -269,7 +269,7 @@ public sealed class Byrd : CustomMonsterModel
 
     private async Task Caw(IReadOnlyList<Creature> targets)
     {
-        ModAudio.Play("byrd", "byrd_death");
+        AFTPModAudio.Play("byrd", "byrd_death");
         TalkCmd.Play(_cawLine, Creature, VfxColor.Swamp, VfxDuration.Short);
         await PowerCmd.Apply<StrengthPower>(new ThrowingPlayerChoiceContext(), Creature, CawStrength, Creature, null);
     }
@@ -296,7 +296,7 @@ public sealed class Byrd : CustomMonsterModel
                 .SetTrans(Tween.TransitionType.Sine);
             await creatureNode.ToSignal(settleTween, Tween.SignalName.Finished);
         }
-        ModAudio.Play("byrd", "flight");
+        AFTPModAudio.Play("byrd", "flight");
         await PowerCmd.Apply<FlightPower>(new ThrowingPlayerChoiceContext(), Creature, FlightAmount, Creature, null);
     }
 
@@ -313,7 +313,7 @@ public sealed class Byrd : CustomMonsterModel
     private void PlayRandomBirdSfx()
     {
         var roll = Rng.Chaotic.NextInt(6) + 1;
-        ModAudio.Play("byrd", $"byrd_talk_{roll}");
+        AFTPModAudio.Play("byrd", $"byrd_talk_{roll}");
     }
 
     private static bool LastMove(MonsterMoveStateMachine stateMachine, string moveId)

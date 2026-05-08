@@ -77,7 +77,7 @@ public sealed class Vampires : CustomEventModel
 
     private async Task Accept()
     {
-        ModAudio.Play("general", "bite");
+        AFTPModAudio.Play("general", "bite");
         var maxHpLoss = (int)DynamicVars["MaxHpLoss"].BaseValue;
         await CreatureCmd.LoseMaxHp(
             new ThrowingPlayerChoiceContext(),
@@ -90,7 +90,7 @@ public sealed class Vampires : CustomEventModel
 
     private async Task Vial()
     {
-        ModAudio.Play("general", "bite");
+        AFTPModAudio.Play("general", "bite");
         var vial = Owner.Relics.First(r => r is BloodVial);
         await RelicCmd.Remove(vial);
         await ReplaceStrikesWithBites();

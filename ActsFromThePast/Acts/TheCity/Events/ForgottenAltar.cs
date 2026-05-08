@@ -51,7 +51,7 @@ public sealed class ForgottenAltar : CustomEventModel
 
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "forgotten_altar");
+        AFTPModAudio.Play("events", "forgotten_altar");
     }
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()

@@ -130,11 +130,11 @@ public class HexaghostOrbVisual : IDisposable
     {
         if (GD.Randf() < 0.5f)
         {
-            ModAudio.Play("hexaghost", "ghost_orb_ignite_1");
+            AFTPModAudio.Play("hexaghost", "ghost_orb_ignite_1");
         }
         else
         {
-            ModAudio.Play("hexaghost", "ghost_orb_ignite_2");
+            AFTPModAudio.Play("hexaghost", "ghost_orb_ignite_2");
         }
     }
     

@@ -130,7 +130,7 @@ public sealed class Champ : CustomMonsterModel
             0 => "champ_death_1",
             _ => "champ_death_2"
         };
-        ModAudio.Play("champ", sfxName);
+        AFTPModAudio.Play("champ", sfxName);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -295,6 +295,7 @@ public sealed class Champ : CustomMonsterModel
 
         for (int i = 0; i < ExecuteCount; i++)
         {
+            VfxCmd.PlayOnCreatures(targets.Where(t => t.IsAlive), "vfx/vfx_heavy_blunt");
             await DamageCmd.Attack(ExecuteDamage)
                 .FromMonster(this)
                 .WithAttackerFx(sfx: "event:/sfx/characters/ironclad/ironclad_attack")
@@ -305,7 +306,7 @@ public sealed class Champ : CustomMonsterModel
 
     private async Task FaceSlap(IReadOnlyList<Creature> targets)
     {
-        ModAudio.Play("champ", "champ_slap");
+        AFTPModAudio.Play("champ", "champ_slap");
         await FastAttackAnimation.Play(Creature);
 
         await DamageCmd.Attack(SlapDamage)
@@ -329,7 +330,7 @@ public sealed class Champ : CustomMonsterModel
     {
         var tauntLines = new[] { _tauntLine1, _tauntLine2, _tauntLine3, _tauntLine4 };
         var taunt = tauntLines[Rng.Chaotic.NextInt(tauntLines.Length)];
-        ModAudio.Play("champ", "champ_taunt");
+        AFTPModAudio.Play("champ", "champ_taunt");
         TalkCmd.Play(taunt, Creature, VfxColor.Blue, VfxDuration.Long);
 
         foreach (var target in targets.Where(t => t.IsAlive))
@@ -343,7 +344,7 @@ public sealed class Champ : CustomMonsterModel
     {
         var limitBreakLines = new[] { _limitBreakLine1, _limitBreakLine2 };
         var line = limitBreakLines[Rng.Chaotic.NextInt(limitBreakLines.Length)];
-        ModAudio.Play("champ", "champ_charge");
+        AFTPModAudio.Play("champ", "champ_charge");
         TalkCmd.Play(line, Creature, VfxColor.Blue, VfxDuration.VeryLong);
         // TODO: Inflame VFX
         await Cmd.Wait(0.75f);

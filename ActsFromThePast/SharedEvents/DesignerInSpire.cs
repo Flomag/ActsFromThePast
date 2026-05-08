@@ -19,7 +19,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace ActsFromThePast.SharedEvents;
 
-public sealed class DesignerInSpire : CustomEventModel, IActRestricted
+public sealed class DesignerInSpire : CustomEventModel, IActRestricted, IShrineEvent
 {
     private const int AdjustCost = 50;
     private const int CleanUpCost = 75;
@@ -32,6 +32,8 @@ public sealed class DesignerInSpire : CustomEventModel, IActRestricted
     private bool _cleanUpRemovesCards;
 
     public override ActModel[] Acts => Array.Empty<ActModel>();
+    
+    bool IShrineEvent.IsOneTimeEvent => true;
     
     public override bool IsAllowed(IRunState runState)
     {

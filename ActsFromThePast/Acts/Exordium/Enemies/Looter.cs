@@ -66,7 +66,9 @@ public sealed class Looter : CustomMonsterModel
         {
             foreach (var thievery in Creature.GetPowerInstances<ThieveryPower>())
             {
-                currentRoom.AddExtraReward(thievery.Target.Player, (Reward)new GoldReward(thievery.Amount, thievery.Target.Player, true));
+                var stolenGold = thievery.DynamicVars.Gold.IntValue;
+                if (stolenGold > 0)
+                    currentRoom.AddExtraReward(thievery.Target.Player, (Reward)new GoldReward(stolenGold, thievery.Target.Player, true));
             }
         }
 
@@ -87,7 +89,7 @@ public sealed class Looter : CustomMonsterModel
             1 => "looter_death_2",
             _ => "looter_death_3"
         };
-        ModAudio.Play("looter", sfxName);
+        AFTPModAudio.Play("looter", sfxName);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -229,7 +231,7 @@ public sealed class Looter : CustomMonsterModel
             1 => "looter_talk_2",
             _ => "looter_talk_3"
         };
-        ModAudio.Play("looter", sfxName);
+        AFTPModAudio.Play("looter", sfxName);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

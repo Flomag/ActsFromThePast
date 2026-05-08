@@ -170,7 +170,7 @@ public sealed class GiantHead : CustomMonsterModel
             1 => "giant_head_talk_2",
             _ => "giant_head_talk_3"
         };
-        ModAudio.Play("giant_head", sfxName);
+        AFTPModAudio.Play("giant_head", sfxName);
     }
 
     private void PlayDeathSfx()
@@ -182,7 +182,7 @@ public sealed class GiantHead : CustomMonsterModel
             1 => "giant_head_death_2",
             _ => "giant_head_death_3"
         };
-        ModAudio.Play("giant_head", sfxName);
+        AFTPModAudio.Play("giant_head", sfxName);
     }
 
     public override async Task BeforeDeath(Creature creature)

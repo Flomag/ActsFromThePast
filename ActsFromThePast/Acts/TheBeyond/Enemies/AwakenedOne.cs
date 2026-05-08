@@ -235,7 +235,7 @@ public sealed class AwakenedOne : CustomMonsterModel
 
     private async Task Slash(IReadOnlyList<Creature> targets)
     {
-        ModAudio.Play("awakened_one", "awakened_one_pounce");
+        AFTPModAudio.Play("awakened_one", "awakened_one_pounce");
         await CreatureCmd.TriggerAnim(Creature, "Slash", 0.0f);
         await Cmd.Wait(0.3f);
 
@@ -258,7 +258,7 @@ public sealed class AwakenedOne : CustomMonsterModel
 
     private async Task DarkEcho(IReadOnlyList<Creature> targets)
     {
-        ModAudio.Play("awakened_one", "awakened_one_talk_3");
+        AFTPModAudio.Play("awakened_one", "awakened_one_talk_3");
 
         var creatureNode = NCombatRoom.Instance?.GetCreatureNode(Creature);
         var spineBody = creatureNode?.Visuals.SpineBody;
@@ -319,7 +319,7 @@ public sealed class AwakenedOne : CustomMonsterModel
 
     private async Task Tackle(IReadOnlyList<Creature> targets)
     {
-        ModAudio.Play("awakened_one", "awakened_one_attack");
+        AFTPModAudio.Play("awakened_one", "awakened_one_attack");
 
         for (int i = 0; i < TackleHits; i++)
         {
@@ -336,7 +336,7 @@ public sealed class AwakenedOne : CustomMonsterModel
     private async Task RebirthMove(IReadOnlyList<Creature> targets)
     {
         Respawns++;
-        ModAudio.Play("awakened_one", "awakened_one_talk_1");
+        AFTPModAudio.Play("awakened_one", "awakened_one_talk_1");
         StartParticleLoop();
 
         var creatureNode = NCombatRoom.Instance?.GetCreatureNode(Creature);

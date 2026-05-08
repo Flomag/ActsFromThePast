@@ -1,4 +1,5 @@
-﻿using BaseLib.Abstracts;
+﻿using ActsFromThePast.Interfaces;
+using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Models;
@@ -6,11 +7,13 @@ using MegaCrit.Sts2.Core.Rewards;
 
 namespace ActsFromThePast.SharedEvents;
 
-public sealed class Lab : CustomEventModel
+public sealed class Lab : CustomEventModel, IShrineEvent
 {
     private const int PotionCount = 2;
 
     public override ActModel[] Acts => Array.Empty<ActModel>();
+    
+    bool IShrineEvent.IsOneTimeEvent => true;
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
@@ -27,7 +30,7 @@ public sealed class Lab : CustomEventModel
     
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "lab");
+        AFTPModAudio.Play("events", "lab");
     }
     
     private async Task Search()

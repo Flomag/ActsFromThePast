@@ -50,7 +50,7 @@ public sealed class Taskmaster : CustomMonsterModel
             0 => "taskmaster_death_1",
             _ => "taskmaster_death_2"
         };
-        ModAudio.Play("taskmaster", sfxName);
+        AFTPModAudio.Play("taskmaster", sfxName);
     }
     
     private void PlayAttackSfx()
@@ -61,7 +61,7 @@ public sealed class Taskmaster : CustomMonsterModel
             0 => "taskmaster_talk_1",
             _ => "taskmaster_talk_2"
         };
-        ModAudio.Play("taskmaster", sfxName);
+        AFTPModAudio.Play("taskmaster", sfxName);
     }
     
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()

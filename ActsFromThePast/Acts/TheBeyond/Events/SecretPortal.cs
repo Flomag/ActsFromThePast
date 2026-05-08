@@ -1,4 +1,5 @@
-﻿using ActsFromThePast.Minigames;
+﻿using ActsFromThePast.Interfaces;
+using ActsFromThePast.Minigames;
 using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
@@ -15,13 +16,15 @@ using MegaCrit.Sts2.Core.Runs;
 
 namespace ActsFromThePast.Acts.TheBeyond.Events;
 
-public sealed class SecretPortal : CustomEventModel
+public sealed class SecretPortal : CustomEventModel, IShrineEvent
 {
     private const int MinRunTimeSeconds = 800;
 
     public override bool IsShared => true;
 
     public override ActModel[] Acts => new[] { ModelDb.Act<TheBeyondAct>() };
+    
+    bool IShrineEvent.IsOneTimeEvent => true;
 
     public override bool IsAllowed(IRunState runState)
     {
@@ -34,7 +37,7 @@ public sealed class SecretPortal : CustomEventModel
 
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "secret_portal");
+        AFTPModAudio.Play("events", "secret_portal");
     }
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()

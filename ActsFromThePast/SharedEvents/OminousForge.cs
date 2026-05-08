@@ -1,4 +1,5 @@
 ﻿using ActsFromThePast.Cards;
+using ActsFromThePast.Interfaces;
 using ActsFromThePast.Relics;
 using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.CardSelection;
@@ -11,9 +12,11 @@ using MegaCrit.Sts2.Core.Runs;
 
 namespace ActsFromThePast.SharedEvents;
 
-public sealed class OminousForge : CustomEventModel
+public sealed class OminousForge : CustomEventModel, IShrineEvent
 {
     public override ActModel[] Acts => Array.Empty<ActModel>();
+    
+    bool IShrineEvent.IsOneTimeEvent => true;
     
     public override bool IsAllowed(IRunState runState)
     {
@@ -42,7 +45,7 @@ public sealed class OminousForge : CustomEventModel
     
     public override void OnRoomEnter()
     {
-        ModAudio.Play("events", "ominous_forge");
+        AFTPModAudio.Play("events", "ominous_forge");
     }
 
     private async Task Forge()

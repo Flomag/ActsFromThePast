@@ -284,7 +284,7 @@ private void UpdateOpacity(float targetAlpha)
 
     private async Task TriBurn(IReadOnlyList<Creature> targets)
     {
-        ModAudio.Play("nemesis", "nemesis_talk_3");
+        AFTPModAudio.Play("nemesis", "nemesis_talk_3");
         var creatureNode = NCombatRoom.Instance?.GetCreatureNode(Creature);
         if (creatureNode != null)
             ShockWaveEffect.PlayChaotic(creatureNode.VfxSpawnPosition);
@@ -315,14 +315,14 @@ private void UpdateOpacity(float targetAlpha)
     {
         var roll = Rng.Chaotic.NextInt(2);
         var sfxName = roll == 0 ? "nemesis_talk_1" : "nemesis_talk_2";
-        ModAudio.Play("nemesis", sfxName);
+        AFTPModAudio.Play("nemesis", sfxName);
     }
 
     private void PlayDeathSfx()
     {
         var roll = Rng.Chaotic.NextInt(2);
         var sfxName = roll == 0 ? "nemesis_death_1" : "nemesis_death_2";
-        ModAudio.Play("nemesis", sfxName);
+        AFTPModAudio.Play("nemesis", sfxName);
     }
 
     public override async Task BeforeDeath(Creature creature)

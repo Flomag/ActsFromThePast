@@ -1,4 +1,5 @@
-﻿using BaseLib.Abstracts;
+﻿using ActsFromThePast.Interfaces;
+using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Events;
@@ -8,7 +9,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace ActsFromThePast.SharedEvents;
 
-public sealed class Purifier : CustomEventModel
+public sealed class Purifier : CustomEventModel, IShrineEvent
 {
     private const decimal HpLossPercent = 0.15M;
 

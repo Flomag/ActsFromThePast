@@ -322,7 +322,7 @@ public sealed class Collector : CustomMonsterModel
 
         foreach (var slot in slots)
         {
-            ModAudio.Play("collector", "collector_summon");
+            AFTPModAudio.Play("collector", "collector_summon");
             var summoned = await CreatureCmd.Add<TorchHead>(CombatState, slot);
             await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), summoned, 1, Creature, null);
         }
@@ -350,7 +350,7 @@ public sealed class Collector : CustomMonsterModel
     private async Task MegaDebuffMove(IReadOnlyList<Creature> targets)
     {
         TalkCmd.Play(_megaDebuffDialog, Creature, VfxColor.Swamp, VfxDuration.Long);
-        ModAudio.Play("collector", "collector_debuff");
+        AFTPModAudio.Play("collector", "collector_debuff");
 
         var target = targets.FirstOrDefault(t => t.IsAlive);
         if (target != null)
@@ -392,7 +392,7 @@ public sealed class Collector : CustomMonsterModel
 
         foreach (var slot in emptySlots)
         {
-            ModAudio.Play("collector", "collector_summon");
+            AFTPModAudio.Play("collector", "collector_summon");
             var summoned = await CreatureCmd.Add<TorchHead>(CombatState, slot);
             await PowerCmd.Apply<MinionPower>(new ThrowingPlayerChoiceContext(), summoned, 1, Creature, null);
         }

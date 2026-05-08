@@ -47,6 +47,7 @@ public sealed class TheCityAct : CustomActModel
     public override Color MapTraveledColor => new Color("27221C");
     public override Color MapUntraveledColor => new Color("6E7750");
     public override Color MapBgColor => new Color("9B9562");
+    protected override int NumberOfWeakEncounters => 2;
 
     protected override string CustomMapTopBgPath => "res://images/packed/map/map_bgs/the_city_act/map_top_the_city_act.png";
     protected override string CustomMapMidBgPath => "res://images/packed/map/map_bgs/the_city_act/map_middle_the_city_act.png";

@@ -1,17 +1,27 @@
-﻿using BaseLib.Abstracts;
+﻿using ActsFromThePast.Interfaces;
+using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.Factories;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 
 namespace ActsFromThePast.SharedEvents;
 
-public sealed class Transmogrifier : CustomEventModel
+public sealed class Transmogrifier : CustomEventModel, IShrineEvent
 {
     public override ActModel[] Acts => Array.Empty<ActModel>();
+    
+    private const int KneelMaxHpLoss = 10;
+
+    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
+    {
+        new IntVar("KneelMaxHpLoss", KneelMaxHpLoss)
+    };
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
@@ -21,6 +31,7 @@ public sealed class Transmogrifier : CustomEventModel
             {
                 Option(Pray),
                 Option(Kneel, "INITIAL_REBALANCED")
+                    .ThatDecreasesMaxHp(KneelMaxHpLoss)
             };
         }
         return new[]
@@ -48,6 +59,12 @@ public sealed class Transmogrifier : CustomEventModel
     
     private async Task Kneel()
     {
+        await CreatureCmd.LoseMaxHp(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            KneelMaxHpLoss,
+            false);
+
         var cards = Owner.Deck.Cards
             .ToList()
             .StableShuffle(Owner.RunState.Rng.Niche)

@@ -49,7 +49,7 @@ public sealed class SlaverBlue : CustomMonsterModel
             0 => "slaver_blue_death_1",
             _ => "slaver_blue_death_2"
         };
-        ModAudio.Play("slaver_blue", sfxName);
+        AFTPModAudio.Play("slaver_blue", sfxName);
     }
 
     protected override MonsterMoveStateMachine GenerateMoveStateMachine()
@@ -147,7 +147,7 @@ public sealed class SlaverBlue : CustomMonsterModel
             0 => "slaver_blue_talk_1",
             _ => "slaver_blue_talk_2"
         };
-        ModAudio.Play("slaver_blue", sfxName);
+        AFTPModAudio.Play("slaver_blue", sfxName);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)

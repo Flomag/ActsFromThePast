@@ -1,4 +1,5 @@
-﻿using BaseLib.Abstracts;
+﻿using ActsFromThePast.Interfaces;
+using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -9,7 +10,7 @@ using MegaCrit.Sts2.Core.Nodes.Vfx.Utilities;
 
 namespace ActsFromThePast.Acts.TheCity.Events;
 
-public sealed class TheJoust : CustomEventModel
+public sealed class TheJoust : CustomEventModel, IShrineEvent
 {
     private const int BetAmount = 50;
     private const int WinMurderer = 100;
@@ -19,6 +20,8 @@ public sealed class TheJoust : CustomEventModel
     private bool _ownerWins;
 
     public override ActModel[] Acts => new[] { ModelDb.Act<TheCityAct>() };
+    
+    bool IShrineEvent.IsOneTimeEvent => true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
     {
