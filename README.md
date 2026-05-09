@@ -30,6 +30,8 @@ Rebalanced Mode is a config (disabled by default) that changes Slay the Spire 1 
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9e374caa-02c7-4155-966f-8994fb56e71e" />
 
+(oh yeah, and this mod also has [Googly Eyes](https://github.com/Cany0udance/GooglyEyes/releases/latest) support)
+
 ## Installation instructions
 1. If there isn't already a `mods` folder located at `C:\Program Files (x86)\Steam\steamapps\common\Slay the Spire 2` (or wherever your file path equivalent is), make one. I'd also highly recommend making a folder within the `mods` folder called `ActsFromThePast`, which is where you should put all the related files.
 2. Put the latest release of this mod's .pck, .dll, and .json files in that folder.
