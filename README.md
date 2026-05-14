@@ -14,7 +14,7 @@ Acts From The Past is a work-in-progress port of the Acts from Slay the Spire 1,
 
 <img width="1369" height="770" alt="image" src="https://github.com/user-attachments/assets/ad195a97-9743-435c-8107-a6fa4c242568" />
 
-The mod *only* includes the encounters and act-specific events from Slay the Spire 1's acts, meaning Shrine events such as Wheel of Change or Lady in Blue have *not* been ported (though I may do that later if there is a demand for it)
+This mod includes ALL events from the first game besides A Note For Yourself.
 
 <img width="1369" height="770" alt="image" src="https://github.com/user-attachments/assets/76f0bb64-0f6d-41c6-8833-62322f85d733" />
 
