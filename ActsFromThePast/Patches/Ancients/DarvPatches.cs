@@ -1,5 +1,4 @@
 ﻿
-/*
 
 using System.Reflection;
 using ActsFromThePast.Acts.TheBeyond;
@@ -23,7 +22,7 @@ public class DarvPatches
 
     public static void Postfix(ActModel __instance)
     {
-        if (!ActsFromThePastConfig.LegacyActsOnly || !ActsFromThePastConfig.DarvOnlyInLegacyActs)
+        if (!ActsFromThePastConfig.DarvOnlyInLegacyActs)
             return;
 
         if (__instance is not TheCityAct and not TheBeyondAct)
@@ -50,7 +49,7 @@ public class DarvUniqueOffersPatch
 
     public static bool Prefix(Darv __instance, ref IReadOnlyList<EventOption> __result)
     {
-        if (!ActsFromThePastConfig.LegacyActsOnly || !ActsFromThePastConfig.DarvOnlyInLegacyActs)
+        if (!ActsFromThePastConfig.DarvOnlyInLegacyActs)
             return true;
 
         var owner = __instance.Owner;
@@ -109,5 +108,3 @@ public class DarvUniqueOffersPatch
         return (EventOption)RelicOptionMethod.Invoke(instance, new object[] { relic, "INITIAL", null });
     }
 }
-
-*/

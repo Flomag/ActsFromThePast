@@ -78,7 +78,7 @@ public partial class NMatchAndKeepScreen : Control, IOverlayScreen, IScreenConte
     {
         if (_instance != null && IsInstanceValid(_instance))
             _instance.QueueFree();
- 
+
         var screen = new NMatchAndKeepScreen();
         screen._minigame = minigame;
         screen._attemptsLeft = minigame.MaxAttempts;
@@ -86,8 +86,9 @@ public partial class NMatchAndKeepScreen : Control, IOverlayScreen, IScreenConte
         screen.BuildUI();
         _instance = screen;
         NOverlayStack.Instance.Push((IOverlayScreen)screen);
+        screen.SetupFocusNeighbors();
         screen.DealCards();
-        
+    
         return screen;
     }
  
@@ -187,9 +188,6 @@ public partial class NMatchAndKeepScreen : Control, IOverlayScreen, IScreenConte
         // Create 12 card slots
         for (int i = 0; i < 12; i++)
             CreateCardSlot(i);
- 
-        // Controller navigation
-        SetupFocusNeighbors();
  
         // Attempts label
         var font = GD.Load<FontVariation>("res://themes/kreon_bold_glyph_space_one.tres");

@@ -229,13 +229,9 @@ public sealed class BronzeOrb : CustomMonsterModel
         {
             var player = target.Player ?? target.PetOwner;
 
-            var drawCards = CardPile.GetCards(player, PileType.Draw)
-                .Where(c => c.DeckVersion != null)
-                .ToList();
-
-            var discardCards = CardPile.GetCards(player, PileType.Discard)
-                .Where(c => c.DeckVersion != null)
-                .ToList();
+            var drawCards = CardPile.GetCards(player, PileType.Draw).ToList();
+            
+            var discardCards = CardPile.GetCards(player, PileType.Discard).ToList();
 
             if (drawCards.Count == 0 && discardCards.Count == 0)
                 continue;

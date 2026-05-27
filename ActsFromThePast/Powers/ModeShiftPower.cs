@@ -37,20 +37,11 @@ public sealed class ModeShiftPower : CustomPowerModel
         int newAmount = Math.Max(0, Amount - result.UnblockedDamage);
         SetAmount(newAmount);
 
-        if (newAmount <= 0)
+        if (newAmount <= 0)if (newAmount <= 0)
         {
             Flash();
-
-            var creatureNode = NCombatRoom.Instance?.GetCreatureNode(Owner);
-            if (creatureNode != null)
-            {
-                var vfx = IntenseZoomEffect.Create(creatureNode.VfxSpawnPosition, false);
-                NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(vfx);
-            }
-
             guardian.CloseUpTriggered = true;
-
-            if (Owner.CombatState?.CurrentSide == Owner.Side)
+            if (guardian.IsExecutingMove)
                 guardian.PendingModeShift = true;
             else
                 await guardian.TransitionToDefensiveMode();

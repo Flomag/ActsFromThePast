@@ -14,10 +14,25 @@ public sealed class SharpHidePower : CustomPowerModel
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
+    public bool AttackInProgress { get; private set; }
+    public Creature AttackSource { get; private set; }
+
+    public override Task BeforeCardPlayed(CardPlay cardPlay)
+    {
+        if (cardPlay.Card.Type == CardType.Attack)
+        {
+            AttackInProgress = true;
+            AttackSource = cardPlay.Card.Owner?.Creature;
+        }
+        return Task.CompletedTask;
+    }
+
     public override async Task AfterCardPlayed(
         PlayerChoiceContext choiceContext,
         CardPlay cardPlay)
     {
+        AttackInProgress = false;
+        AttackSource = null;
         if (cardPlay.Card.Type != CardType.Attack)
             return;
         Flash();

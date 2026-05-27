@@ -77,6 +77,7 @@ public partial class NPortalMapBuilderScreen : Control, IOverlayScreen, IScreenC
         screen.RefreshAll();
         _instance = screen;
         NOverlayStack.Instance.Push((IOverlayScreen)screen);
+        screen.SetupNodeFocusNeighbors();
         return screen;
     }
  
@@ -308,7 +309,6 @@ public partial class NPortalMapBuilderScreen : Control, IOverlayScreen, IScreenC
         AddChild(_budgetLabel);
         BuildProceedButton();
         BuildRandomizeButton();
-        SetupNodeFocusNeighbors();
     }
  
     // ─── Node Slots ───

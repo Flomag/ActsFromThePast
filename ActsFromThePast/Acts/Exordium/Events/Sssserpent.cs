@@ -1,12 +1,15 @@
 ﻿using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Potions;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Models.PotionPools;
+using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Runs;
 
 namespace ActsFromThePast.Acts.Exordium.Events;
@@ -70,20 +73,18 @@ public sealed class Sssserpent : CustomEventModel
     
     private async Task DisagreeRebalanced()
     {
-        var options = new CardCreationOptions(
-            new[] { Owner.Character.CardPool },
-            CardCreationSource.Other,
-            CardRarityOddsType.Uniform,
-            c => c.Rarity == CardRarity.Rare
-        ).WithFlags(CardCreationFlags.NoUpgradeRoll);
-
-        var list = CardFactory.CreateForReward(Owner, 1, options)
-            .Select(r => r.Card)
-            .ToList();
-
-        if (list.Count > 0)
-            CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(list[0], PileType.Deck));
-
+        var potions = Owner.Character.PotionPool
+            .GetUnlockedPotions(Owner.UnlockState)
+            .Concat(ModelDb.PotionPool<SharedPotionPool>().GetUnlockedPotions(Owner.UnlockState))
+            .Where(p => p.Rarity == PotionRarity.Uncommon);
+        var potion = Owner.PlayerRng.Rewards.NextItem(potions);
+        if (potion != null)
+        {
+            await RewardsCmd.OfferCustom(Owner, new List<Reward>(1)
+            {
+                new PotionReward(potion.ToMutable(), Owner)
+            });
+        }
         SetEventFinished(PageDescription("DISAGREE_REBALANCED"));
     }
 }

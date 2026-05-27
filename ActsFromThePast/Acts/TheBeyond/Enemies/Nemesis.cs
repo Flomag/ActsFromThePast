@@ -2,6 +2,7 @@
 using Godot;
 using MegaCrit.Sts2.Core.Animation;
 using MegaCrit.Sts2.Core.Bindings.MegaSpine;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -43,6 +44,14 @@ public sealed class Nemesis : CustomMonsterModel
     private bool _alive = true;
     private SceneTreeTimer _fireTimer;
     private Tween _opacityTween;
+    
+    private bool _shouldApplyIntangible;
+
+    private bool ShouldApplyIntangible
+    {
+        get => _shouldApplyIntangible;
+        set { AssertMutable(); _shouldApplyIntangible = value; }
+    }
 
     private bool FirstMove
     {
@@ -267,7 +276,6 @@ private void UpdateOpacity(float targetAlpha)
                 .WithHitFx("vfx/vfx_attack_blunt")
                 .Execute(null);
         }
-        await ApplyIntangibleIfNeeded();
     }
 
     private async Task Scythe(IReadOnlyList<Creature> targets)
@@ -279,7 +287,6 @@ private void UpdateOpacity(float targetAlpha)
             .WithAttackerFx(sfx: "event:/sfx/characters/necrobinder/necrobinder_attack")
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(null);
-        await ApplyIntangibleIfNeeded();
     }
 
     private async Task TriBurn(IReadOnlyList<Creature> targets)
@@ -297,17 +304,25 @@ private void UpdateOpacity(float targetAlpha)
             await CardPileCmd.AddToCombatAndPreview<Burn>(targets, PileType.Discard, BurnAmount, (Player)null);
             CardCmd.PreviewCardPileAdd(results, 2f);
         }
-
-        await ApplyIntangibleIfNeeded();
     }
-
-    private async Task ApplyIntangibleIfNeeded()
+    
+    public override async Task AfterSideTurnEnd(
+        PlayerChoiceContext choiceContext,
+        CombatSide side,
+        IEnumerable<Creature> participants)
     {
-        if (!Creature.HasPower<IntangiblePower>())
+        if (!participants.Contains(Creature))
+            return;
+
+        ShouldApplyIntangible = !ShouldApplyIntangible;
+
+        if (ShouldApplyIntangible)
         {
-            var intangible = await PowerCmd.Apply<IntangiblePower>(new ThrowingPlayerChoiceContext(), Creature, 1, Creature, null);
-            if (intangible != null)
-                intangible.SkipNextDurationTick = true;
+            await PowerCmd.Apply<IntangiblePower>(choiceContext, Creature, 1, Creature, null);
+        }
+        else if (Creature.HasPower<IntangiblePower>())
+        {
+            await PowerCmd.Remove(Creature.GetPower<IntangiblePower>());
         }
     }
 

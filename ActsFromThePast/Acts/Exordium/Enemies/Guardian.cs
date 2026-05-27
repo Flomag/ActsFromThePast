@@ -63,6 +63,10 @@ public sealed class Guardian : CustomMonsterModel
             _pendingModeShift = value;
         }
     }
+    
+    private bool _isExecutingMove;
+
+    public bool IsExecutingMove => _isExecutingMove;
 
     private static readonly LocString _destroyDialog = L10NMonsterLookup("ACTSFROMTHEPAST-GUARDIAN.moves.CHARGE_UP.dialog");
 
@@ -182,11 +186,13 @@ public sealed class Guardian : CustomMonsterModel
 
     private async Task FierceBash(IReadOnlyList<Creature> targets)
     {
+        _isExecutingMove = true;
         await FastAttackAnimation.Play(Creature);
         await DamageCmd.Attack(FierceBashDamage)
             .FromMonster(this)
             .WithHitFx("vfx/vfx_attack_blunt", tmpSfx: "blunt_attack.mp3")
             .Execute(null);
+        _isExecutingMove = false;
         await CheckPendingModeShift();
     }
 
@@ -202,6 +208,7 @@ public sealed class Guardian : CustomMonsterModel
 
     private async Task Whirlwind(IReadOnlyList<Creature> targets)
     {
+        _isExecutingMove = true;
         await FastAttackAnimation.Play(Creature);
         AFTPModAudio.Play("general", "whirlwind");
 
@@ -226,6 +233,7 @@ public sealed class Guardian : CustomMonsterModel
                 .FromMonster(this)
                 .Execute(null);
         }
+        _isExecutingMove = false;
         await CheckPendingModeShift();
     }
 
@@ -246,6 +254,7 @@ public sealed class Guardian : CustomMonsterModel
 
     private async Task TwinSlam(IReadOnlyList<Creature> targets)
     {
+        _isExecutingMove = true;
         await TransitionToOffensiveMode();
         await DamageCmd.Attack(TwinSlamDamage)
             .WithHitCount(TwinSlamHits)
@@ -254,19 +263,25 @@ public sealed class Guardian : CustomMonsterModel
             .WithHitFx("vfx/vfx_attack_blunt")
             .Execute(null);
         await PowerCmd.Remove<SharpHidePower>(Creature);
+        _isExecutingMove = false;
         await CheckPendingModeShift();
     }
 
     public async Task TransitionToDefensiveMode(bool setMove = true)
     {
+        var creatureNode = NCombatRoom.Instance?.GetCreatureNode(Creature);
+        if (creatureNode != null)
+        {
+            var vfx = IntenseZoomEffect.Create(creatureNode.VfxSpawnPosition, false);
+            NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(vfx);
+        }
         await PowerCmd.Remove<ModeShiftPower>(Creature);
         _nextThreshold += DmgThresholdIncrease;
         AFTPModAudio.Play("guardian", "guardian_boss_transform");
         await CreatureCmd.GainBlock(Creature, DefensiveBlock, ValueProp.Move, null);
 
         await CreatureCmd.TriggerAnim(Creature, "transition", 0.0f);
-
-        var creatureNode = NCombatRoom.Instance?.GetCreatureNode(Creature);
+        
         var spineBody = creatureNode?.Visuals.SpineBody;
 
         if (spineBody != null)
@@ -310,6 +325,25 @@ public sealed class Guardian : CustomMonsterModel
 
         _isOpen = true;
         _closeUpTriggered = false;
+    }
+    
+    public override async Task BeforeDeath(Creature creature)
+    {
+        if (creature == Creature)
+        {
+            var sharpHide = Creature.GetPower<SharpHidePower>();
+            if (sharpHide is { AttackInProgress: true, AttackSource.IsAlive: true })
+            {
+                await CreatureCmd.Damage(
+                    new ThrowingPlayerChoiceContext(),
+                    sharpHide.AttackSource,
+                    (decimal)sharpHide.Amount,
+                    ValueProp.Unpowered,
+                    null,
+                    null);
+            }
+        }
+        await base.BeforeDeath(creature);
     }
 
     public override CreatureAnimator GenerateAnimator(MegaSprite controller)
