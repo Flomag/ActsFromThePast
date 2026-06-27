@@ -644,7 +644,7 @@
   "ACTSFROMTHEPAST-THE_MAUSOLEUM.pages.INITIAL.options.LEAVE.title": "离开",
   "ACTSFROMTHEPAST-THE_MAUSOLEUM.pages.INITIAL.options.OPEN.description": "获得一件随机[gold]遗物[/gold]。将[red]苦恼[/red]加入你的[gold]牌组[/gold]。",
   "ACTSFROMTHEPAST-THE_MAUSOLEUM.pages.INITIAL.options.OPEN.title": "打开棺材",
-  "ACTSFROMTHEPAST-THE_MAUSOLEUM.pages.INITIAL_REBALANCED.options.PAY_RESPECTS.description": "失去[gold]{SacrificeRelic}[/gold]。获得[green]{MaxHpGain}[/green]最大生命。",
+  "ACTSFROMTHEPAST-THE_MAUSOLEUM.pages.INITIAL_REBALANCED.options.PAY_RESPECTS.description": "失去[gold]{SacrificeRelic}[/gold]。获得[green]{MaxHpGain}[/green]点最大生命。",
   "ACTSFROMTHEPAST-THE_MAUSOLEUM.pages.INITIAL_REBALANCED.options.PAY_RESPECTS.title": "致敬",
   "ACTSFROMTHEPAST-THE_MAUSOLEUM.pages.LEAVE.description": "你决定不去打扰被遗忘的死者，继续赶路。",
   "ACTSFROMTHEPAST-THE_MAUSOLEUM.pages.OPEN_CURSED.description": "你推开石棺，一股[purple][sine]黑雾[/sine][/purple]涌了出来，淹没了整个房间！石棺里没有实体，只有一件[gold][sine]遗物[/sine][/gold]。你拾起它重新上路， 并[red][jitter]剧烈地咳嗽起来[/jitter][/red]。",
