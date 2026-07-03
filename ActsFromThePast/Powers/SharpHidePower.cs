@@ -39,7 +39,10 @@ public sealed class SharpHidePower : CustomPowerModel
         var player = cardPlay.Card.Owner?.Creature;
         if (player != null && player.IsAlive)
         {
-            await CreatureCmd.Damage(choiceContext, player, (decimal)Amount, ValueProp.Unpowered, Owner, null);
+            await CreatureCmd.Damage(
+                choiceContext, player,
+                (decimal) Amount, ValueProp.Unpowered,
+                null, null);
         }
     }
 }

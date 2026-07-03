@@ -21,7 +21,10 @@ public sealed class ConstrictedPower : CustomPowerModel
         ConstrictedPower constrictedPower = this;
         if (side != constrictedPower.Owner.Side)
             return;
-        IEnumerable<DamageResult> damageResults = await CreatureCmd.Damage(choiceContext, constrictedPower.Owner, (Decimal) constrictedPower.Amount, ValueProp.Unpowered, constrictedPower.Owner, (CardModel) null);
+        IEnumerable<DamageResult> damageResults = await CreatureCmd.Damage(
+            choiceContext, constrictedPower.Owner,
+            (decimal) constrictedPower.Amount, ValueProp.Unpowered,
+            null, null);
     }
 
     public override async Task AfterDeath(

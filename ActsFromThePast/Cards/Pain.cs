@@ -45,10 +45,10 @@ public sealed class Pain : CustomCardModel
             return;
 
         await CreatureCmd.Damage(
-            new ThrowingPlayerChoiceContext(),
+            null,
             Owner.Creature,
             DynamicVars.HpLoss.BaseValue,
             ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
-            this);
+            null, null);
     }
 }

@@ -45,7 +45,8 @@ public sealed class TheLibrary : CustomEventModel
         var cardResults = CardFactory.CreateForReward(
                 Owner,
                 CardChoiceCount,
-                CardCreationOptions.ForNonCombatWithDefaultOdds(Owner.Character.CardPool.AllCards))
+                CardCreationOptions.ForNonCombatWithDefaultOdds(
+                    new[] { Owner.Character.CardPool }))
             .ToList();
 
         var prefs = new CardSelectorPrefs(

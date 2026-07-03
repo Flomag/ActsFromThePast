@@ -266,7 +266,7 @@ public sealed class AwakenedOne : CustomMonsterModel
         {
             var animState = spineBody.GetAnimationState();
             animState.SetAnimation("Attack_2", false, 0);
-            var queued = animState.AddAnimation("Idle_2", 0.0f, true, 0);
+            using var queued = animState.AddAnimationTracked("Idle_2", 0.0f, true, 0);
             queued?.SetMixDuration(0.2f);
         }
 
@@ -292,7 +292,7 @@ public sealed class AwakenedOne : CustomMonsterModel
         {
             var animState = spineBody.GetAnimationState();
             animState.SetAnimation("Attack_2", false, 0);
-            var queued = animState.AddAnimation("Idle_2", 0.0f, true, 0);
+            using var queued = animState.AddAnimationTracked("Idle_2", 0.0f, true, 0);
             queued?.SetMixDuration(0.2f);
         }
 

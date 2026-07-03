@@ -240,6 +240,7 @@ public class AnimationPatches
                     __result = PlayHitWithMix(creature, "Hit", "Idle", 0.1f);
                     return false;
                 }
+
                 if (triggerName == "Slash")
                 {
                     __result = PlayAnimWithMixBothWays(creature, "Attack", "Idle", 0.1f);
@@ -392,7 +393,8 @@ public class AnimationPatches
 
         */
 
-        private static async Task PlayHitWithMix(Creature creature, string hitAnim, string idleAnim, float mixDuration)
+        private static async Task PlayHitWithMix(
+            Creature creature, string hitAnim, string idleAnim, float mixDuration)
         {
             var creatureNode = NCombatRoom.Instance?.GetCreatureNode(creature);
             var spineBody = creatureNode?.Visuals.SpineBody;
@@ -400,174 +402,178 @@ public class AnimationPatches
             {
                 var animState = spineBody.GetAnimationState();
                 animState.SetAnimation(hitAnim, false, 0);
-                var queued = animState.AddAnimation(idleAnim, 0.0f, true, 0);
+                using var queued = animState.AddAnimationTracked(idleAnim, 0.0f, true, 0);
                 queued?.SetMixDuration(mixDuration);
             }
         }
 
-        private static async Task PlayAnimWithMix(Creature creature, string animName, float mixDuration)
+        private static async Task PlayAnimWithMix(
+            Creature creature, string animName, float mixDuration)
         {
             var creatureNode = NCombatRoom.Instance?.GetCreatureNode(creature);
             var spineBody = creatureNode?.Visuals.SpineBody;
             if (spineBody != null)
             {
                 var animState = spineBody.GetAnimationState();
-                var entry = animState.SetAnimation(animName, false, 0);
+                animState.SetAnimation(animName, false, 0);
+                using var entry = animState.GetCurrent(0);
                 entry?.SetMixDuration(mixDuration);
             }
         }
 
         private static async Task PlayAnimWithMixBothWays(
-            Creature creature, string animName, string idleAnim, float mixDuration, float exitDelay = 0.0f)
+            Creature creature, string animName, string idleAnim,
+            float mixDuration, float exitDelay = 0.0f)
         {
             var creatureNode = NCombatRoom.Instance?.GetCreatureNode(creature);
             var spineBody = creatureNode?.Visuals.SpineBody;
             if (spineBody != null)
             {
                 var animState = spineBody.GetAnimationState();
-                var entry = animState.SetAnimation(animName, false, 0);
+                animState.SetAnimation(animName, false, 0);
+                using var entry = animState.GetCurrent(0);
                 entry?.SetMixDuration(mixDuration);
-                var queued = animState.AddAnimation(idleAnim, exitDelay, true, 0);
+                using var queued = animState.AddAnimationTracked(idleAnim, exitDelay, true, 0);
                 queued?.SetMixDuration(mixDuration);
             }
         }
-    }
 
-    [HarmonyPatch(typeof(Hook), nameof(Hook.AfterRoomEntered))]
-    public class StaggerCleanupPatch
-    {
-        public static void Postfix()
+        [HarmonyPatch(typeof(Hook), nameof(Hook.AfterRoomEntered))]
+        public class StaggerCleanupPatch
         {
-            StaggerAnimation.Reset();
-        }
-    }
-
-    [HarmonyPatch(typeof(NCreature), nameof(NCreature.GetCurrentAnimationTimeRemaining))]
-    public static class DeathAnimTimePatch
-    {
-        private static readonly HashSet<NCreature> _dyingCreatures = new();
-
-        public static void MarkAsDying(NCreature creature) => _dyingCreatures.Add(creature);
-
-        public static bool Prefix(NCreature __instance, ref float __result)
-        {
-            if (__instance.Entity.Monster == null)
-                return true;
-
-            if (!_dyingCreatures.Contains(__instance))
-                return true;
-
-            _dyingCreatures.Remove(__instance);
-            __result = 0f;
-            return false;
-        }
-    }
-
-    [HarmonyPatch(typeof(NCreature), nameof(NCreature.StartDeathAnim))]
-    public static class DeathAnimStartPatch
-    {
-        public static void Prefix(NCreature __instance, ref bool shouldRemove)
-        {
-            var shouldOverride = __instance.Entity.Monster switch
+            public static void Postfix()
             {
-                // Exordium Enemies
+                StaggerAnimation.Reset();
+            }
+        }
 
-                AcidSlimeLarge => true,
-                AcidSlimeMedium => true,
-                AcidSlimeSmall => true,
-                Cultist => true,
-                FungiBeast => true,
-                GremlinFat => true,
-                GremlinMad => true,
-                GremlinShield => true,
-                GremlinSneaky => true,
-                GremlinWizard => true,
-                JawWorm => true,
-                Looter => true,
-                LouseGreen => true,
-                LouseRed => true,
-                SlaverBlue => true,
-                SlaverRed => true,
-                SpikeSlimeLarge => true,
-                SpikeSlimeMedium => true,
-                SpikeSlimeSmall => true,
+        [HarmonyPatch(typeof(NCreature), nameof(NCreature.GetCurrentAnimationTimeRemaining))]
+        public static class DeathAnimTimePatch
+        {
+            private static readonly HashSet<NCreature> _dyingCreatures = new();
 
-                // Exordium Elites
+            public static void MarkAsDying(NCreature creature) => _dyingCreatures.Add(creature);
 
-                GremlinNob => true,
-                Lagavulin => true,
-                Sentry => true,
-
-                // Exordium Bosses
-
-                Guardian => true,
-                Hexaghost => false,
-                SlimeBoss => true,
-
-                // City Enemies
-
-                Byrd => true,
-                Centurion => true,
-                Mugger => true,
-                Mystic => true,
-                Chosen => true,
-                ShelledParasite => true,
-                SnakePlant => true,
-                SphericGuardian => true,
-                Pointy => true,
-                Romeo => true,
-                Bear => true,
-
-                // City Elites
-
-                Taskmaster => true,
-                BookOfStabbing => true,
-                GremlinLeader => true,
-
-                // City Bosses
-
-                TorchHead => true,
-                Collector => true,
-                Champ => true,
-                BronzeAutomaton => true,
-                BronzeOrb => false,
-
-                // Beyond Enemies
-
-                Darkling => true,
-                Exploder => true,
-                Maw => true,
-                OrbWalker => true,
-                Repulsor => true,
-                Spiker => true,
-                SpireGrowth => true,
-                Transient => true,
-                WrithingMass => true,
-
-                // Beyond Elites
-
-                GiantHead => true,
-                Nemesis => true,
-                Reptomancer => true,
-                SnakeDagger => true,
-
-                // Beyond Bosses
-
-                AwakenedOne => true,
-                Donu => true,
-                Deca => true,
-
-                _ => false
-            };
-            if (!shouldOverride)
-                return;
-
-            DeathAnimTimePatch.MarkAsDying(__instance);
-            
-            if (!shouldRemove && __instance.Entity.Monster is BookOfStabbing or Reptomancer)
+            public static bool Prefix(NCreature __instance, ref float __result)
             {
-                shouldRemove = true;
-                NCombatRoom.Instance?.RemoveCreatureNode(__instance);
+                if (__instance.Entity.Monster == null)
+                    return true;
+
+                if (!_dyingCreatures.Contains(__instance))
+                    return true;
+
+                _dyingCreatures.Remove(__instance);
+                __result = 0f;
+                return false;
+            }
+        }
+
+        [HarmonyPatch(typeof(NCreature), nameof(NCreature.StartDeathAnim))]
+        public static class DeathAnimStartPatch
+        {
+            public static void Prefix(NCreature __instance, ref bool shouldRemove)
+            {
+                var shouldOverride = __instance.Entity.Monster switch
+                {
+                    // Exordium Enemies
+
+                    AcidSlimeLarge => true,
+                    AcidSlimeMedium => true,
+                    AcidSlimeSmall => true,
+                    Cultist => true,
+                    FungiBeast => true,
+                    GremlinFat => true,
+                    GremlinMad => true,
+                    GremlinShield => true,
+                    GremlinSneaky => true,
+                    GremlinWizard => true,
+                    JawWorm => true,
+                    Looter => true,
+                    LouseGreen => true,
+                    LouseRed => true,
+                    SlaverBlue => true,
+                    SlaverRed => true,
+                    SpikeSlimeLarge => true,
+                    SpikeSlimeMedium => true,
+                    SpikeSlimeSmall => true,
+
+                    // Exordium Elites
+
+                    GremlinNob => true,
+                    Lagavulin => true,
+                    Sentry => true,
+
+                    // Exordium Bosses
+
+                    Guardian => true,
+                    Hexaghost => false,
+                    SlimeBoss => true,
+
+                    // City Enemies
+
+                    Byrd => true,
+                    Centurion => true,
+                    Mugger => true,
+                    Mystic => true,
+                    Chosen => true,
+                    ShelledParasite => true,
+                    SnakePlant => true,
+                    SphericGuardian => true,
+                    Pointy => true,
+                    Romeo => true,
+                    Bear => true,
+
+                    // City Elites
+
+                    Taskmaster => true,
+                    BookOfStabbing => true,
+                    GremlinLeader => true,
+
+                    // City Bosses
+
+                    TorchHead => true,
+                    Collector => true,
+                    Champ => true,
+                    BronzeAutomaton => true,
+                    BronzeOrb => false,
+
+                    // Beyond Enemies
+
+                    Darkling => true,
+                    Exploder => true,
+                    Maw => true,
+                    OrbWalker => true,
+                    Repulsor => true,
+                    Spiker => true,
+                    SpireGrowth => true,
+                    Transient => true,
+                    WrithingMass => true,
+
+                    // Beyond Elites
+
+                    GiantHead => true,
+                    Nemesis => true,
+                    Reptomancer => true,
+                    SnakeDagger => true,
+
+                    // Beyond Bosses
+
+                    AwakenedOne => true,
+                    Donu => true,
+                    Deca => true,
+
+                    _ => false
+                };
+                if (!shouldOverride)
+                    return;
+
+                DeathAnimTimePatch.MarkAsDying(__instance);
+
+                if (!shouldRemove && __instance.Entity.Monster is BookOfStabbing or Reptomancer)
+                {
+                    shouldRemove = true;
+                    NCombatRoom.Instance?.RemoveCreatureNode(__instance);
+                }
             }
         }
     }

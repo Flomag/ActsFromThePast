@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.MonsterMoves.MonsterMoveStateMachine;
@@ -110,8 +111,8 @@ public sealed class Exploder : CustomMonsterModel
         foreach (var target in targets.Where(t => t.IsAlive))
         {
             await CreatureCmd.Damage(
-                new ThrowingPlayerChoiceContext(), target, ExplodeDamage,
-                ValueProp.Move, Creature, null);
+                null, target, ExplodeDamage,
+                ValueProp.Move, null, null);
         }
 
         await CreatureCmd.Kill(Creature);

@@ -68,7 +68,7 @@ public sealed class MysteriousSphere : CustomEventModel
     
     private async Task Distract()
     {
-        var enemies = _combatStateForCombatLayout.Enemies;
+        var enemies = _combatSynchronizer.CombatStateForLayout.Enemies;
         foreach (var enemy in enemies)
         {
             var creatureNode = NCombatRoom.Instance?.GetCreatureNode(enemy);

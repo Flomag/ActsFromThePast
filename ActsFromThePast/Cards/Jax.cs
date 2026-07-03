@@ -57,7 +57,7 @@ public sealed class Jax : CustomCardModel
             Owner.Creature,
             DynamicVars.HpLoss.BaseValue,
             ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
-            this);
+            null, null);
 
         await PowerCmd.Apply<StrengthPower>(
             new ThrowingPlayerChoiceContext(), 

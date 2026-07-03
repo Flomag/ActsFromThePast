@@ -41,7 +41,7 @@ public sealed class Bite : CustomCardModel
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCard(this, cardPlay)
             .Targeting(cardPlay.Target)
             .WithHitFx("vfx/vfx_bite", tmpSfx: "blunt_attack.mp3")
             .Execute(choiceContext);
