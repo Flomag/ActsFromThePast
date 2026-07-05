@@ -1,0 +1,18 @@
+{
+  "ACTSFROMTHEPAST-BITE.description": "Infligez {Damage:diff()} dégâts.\nRécupérez {Heal:diff()} PV.",
+  "ACTSFROMTHEPAST-BITE.title": "Morsure",
+  "ACTSFROMTHEPAST-JAX.description": "Perdez {HpLoss:diff()} PV.\nGagnez {StrengthPower:diff()} de [gold]Force[/gold].",
+  "ACTSFROMTHEPAST-JAX.title": "D.O.P.E.",
+  "ACTSFROMTHEPAST-MADNESS.description": "Une carte aléatoire de votre [gold]Main[/gold] coûte 0 pour le reste du combat.",
+  "ACTSFROMTHEPAST-MADNESS.title": "Folie",
+  "ACTSFROMTHEPAST-NECRONOMICURSE.description": "Personne n'échappe à cette [red]Malédiction[/red].",
+  "ACTSFROMTHEPAST-NECRONOMICURSE.title": "Malédiction fatale",
+  "ACTSFROMTHEPAST-PAIN.description": "Si vous l'avez en [gold]Main[/gold], perdez {HpLoss:diff()} PV par carte jouée.",
+  "ACTSFROMTHEPAST-PAIN.title": "Douleur",
+  "ACTSFROMTHEPAST-PARASITE.description": "Si la carte est [gold]Transformée[/gold] ou retirée de votre [gold]Deck[/gold], perdez 3 PV max.",
+  "ACTSFROMTHEPAST-PARASITE.title": "Parasite",
+  "ACTSFROMTHEPAST-RITUAL_DAGGER.description": "Infligez {Damage:diff()} dégâts.\n[gold]Coup de grâce[/gold] : augmentez définitivement les dégâts de cette carte de {Increase:diff()}.",
+  "ACTSFROMTHEPAST-RITUAL_DAGGER.title": "Dague rituelle",
+  "ACTSFROMTHEPAST-THE_BOX.title": "La Boîte",
+  "ACTSFROMTHEPAST-THE_BOX.description": "Si la carte est retirée de votre [gold]Deck[/gold] dans une boutique, votre prochain achat dans cette boutique est gratuit."
+}
