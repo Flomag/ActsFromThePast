@@ -3,8 +3,8 @@
 	"ACTSFROMTHEPAST-BURN_BRIGHT.description": "Les dégâts d'attaque de cette carte sont doublés et la carte est retirée de votre [gold]Deck[/gold] après [blue]5[/blue] combats.",
 	"ACTSFROMTHEPAST-BURN_BRIGHT.extraCardText": "Retirée de votre Deck après {Combats} {Combats:plural:combat|combats}.",
 	"ACTSFROMTHEPAST-FEARFUL.title": "Frayeur",
-	"ACTSFROMTHEPAST-FEARFUL.description": "Triple l'[gold]Armure[/gold] conférée par cette carte. Lorsque cette carte est jouée, gagnez [blue]1[/blue] de [gold]Vulnérabilité[/gold].",
-	"ACTSFROMTHEPAST-FEARFUL.extraCardText": "Gagnez 1 de Vulnérabilité.",
+	"ACTSFROMTHEPAST-FEARFUL.description": "Triple l'[gold]Armure[/gold] conférée par cette carte. Lorsque cette carte est jouée, gagnez [blue]1[/blue] [gold]Vulnérable[/gold].",
+	"ACTSFROMTHEPAST-FEARFUL.extraCardText": "Gagnez 1 Vulnérable.",
 	"ACTSFROMTHEPAST-HAUNTED.title": "Hantise",
 	"ACTSFROMTHEPAST-HAUNTED.description": "Chaque fois que vous piochez cette carte, gagnez [purple]Résonance[/purple]. Lorsque cette carte est jouée, gagnez [blue]1[/blue] [gold]Intangible[/gold].",
 	"ACTSFROMTHEPAST-HAUNTED.extraCardText": "Chaque fois que vous piochez cette carte, gagnez Résonance.\nGagnez 1 Intangible."
