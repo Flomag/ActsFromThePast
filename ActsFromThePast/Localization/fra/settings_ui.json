@@ -1,0 +1,13 @@
+{
+	"ACTSFROMTHEPAST.mod_title": "Acts from the Past",
+	"ACTSFROMTHEPAST-REBALANCED_MODE.title": "Mode rééquilibré",
+	"ACTSFROMTHEPAST-REBALANCED_MODE.hover.desc": "Rééquilibre le contenu classique pour mieux correspondre à l'environnement de Slay the Spire 2. Ne concerne que les événements pour le moment.\n\nDésactivé par défaut (mais on vous recommande d'essayer !).",
+	"ACTSFROMTHEPAST-ALLOW_NON_LEGACY_SHARED_EVENTS_IN_LEGACY_ACTS.title": "Autoriser les événements partagés non classiques dans les actes classiques",
+	"ACTSFROMTHEPAST-ALLOW_NON_LEGACY_SHARED_EVENTS_IN_LEGACY_ACTS.hover.desc": "Si activé, les événements partagés de Slay the Spire 2 ou d'autres mods peuvent toujours apparaître dans les actes classiques.\n\nActivé par défaut.",
+	"ACTSFROMTHEPAST-ALLOW_LEGACY_SHARED_EVENTS_IN_NON_LEGACY_ACTS.title": "Autoriser les événements partagés classiques dans les actes non classiques",
+	"ACTSFROMTHEPAST-ALLOW_LEGACY_SHARED_EVENTS_IN_NON_LEGACY_ACTS.hover.desc": "Si activé, les événements partagés ajoutés par Acts From The Past peuvent apparaître dans les actes non classiques, comme les actes du jeu de base ou ceux ajoutés par d'autres mods.\n\nDésactivé par défaut.",
+	"ACTSFROMTHEPAST-DARV_ONLY_IN_LEGACY_ACTS.title": "Uniquement Darv dans les actes classiques",
+	"ACTSFROMTHEPAST-DARV_ONLY_IN_LEGACY_ACTS.hover.desc": "Fait en sorte que Darv soit toujours l'Ancien de La Ville et de L'Au-Delà, pour se rapprocher du système de reliques de Boss de Slay the Spire 1.\n\nIl est recommandé de l'utiliser avec le mod [gold]Act Toggler[/gold].\n\nDésactivé par défaut.",
+	"ACTSFROMTHEPAST-LEGACY_ENEMIES_GIVE_CLASSIC_SLIMED.title": "Les ennemis classiques infligent l'Englué classique",
+	"ACTSFROMTHEPAST-LEGACY_ENEMIES_GIVE_CLASSIC_SLIMED.hover.desc": "Fait en sorte que les cartes [green]Englué[/green] générées par les ennemis d'Acts From The Past perdent l'effet \"piochez une carte\", conformément au fonctionnement d'[green]Englué[/green] dans Slay the Spire 1.\n\nDésactivé par défaut."
+}
