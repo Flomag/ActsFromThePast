@@ -1,0 +1,67 @@
+[h1]IMPORTANT ![/h1]
+[list]
+[*]Acts from the Past n'est pas encore terminé ! Il subsiste notamment des effets sonores et visuels provisoires, de la logique manquante par endroits, etc.
+[*]Vous devez être sur la [b]branche bêta[/b] de Slay the Spire 2 pour jouer avec Acts from the Past.
+[*]Si vous souhaitez corriger ou proposer une traduction, référez-vous aux [url=https://github.com/Cany0udance/ActsFromThePast/tree/main/ActsFromThePast/Localization]fichiers de localisation[/url]. N'hésitez pas à faire une pull request sur le dépôt Git ou à m'envoyer les fichiers directement.
+[*]Si vous souhaitez jouer UNIQUEMENT avec l'Exorde/La Ville/L'Au-Delà, installez également [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3737158447]Act Toggler[/url].
+[*]Pour jouer avec Acts from the Past en multijoueur, TOUS les joueurs doivent avoir la même configuration.
+[/list]
+
+[h1]Acts From The Past[/h1]
+Acts from the Past est un portage en cours de développement des Actes de Slay the Spire 1, comprenant l'Exorde, La Ville et L'Au-Delà. Ces actes sont ajoutés à la réserve d'actes du jeu de base via le CustomActModel de BaseLib. Le mod inclut aussi tous les événements du premier jeu, à l'exception d'Une note pour vous-même. Attendez-vous également à des retouches visuelles sur plusieurs ennemis !
+
+Bien que l'objectif de ce mod soit de porter fidèlement le contenu de Slay the Spire 1, je me suis tout de même permis quelques changements. En voici quelques-uns :
+[list]
+[*]Les Êtres sombres n'apparaissent [b]plus que[/b] dans la réserve facile de L'Au-Delà, au lieu des réserves facile ET difficile
+[*]Tas de déchets peut être rencontré dans n'importe quel acte de StS1
+[*]Les rencontres n'ont plus de « poids », ce qui signifie que vous avez autant de chances de tomber sur n'importe laquelle
+[*]L'Explosif n'a plus de pouvoir Kamikaze. À la place, il a une intention « Râle d'agonie », comme les ennemis Bombe à gaz et Géant de la Cascade du jeu de base. Techniquement, ça rend l'Explosif plus facile puisque son explosion peut être atténuée par Affaibli, mais bon.
+[/list]
+Il y a d'autres petits changements, mais ce sont les plus importants pour le gameplay qui me viennent en tête.
+
+(ah oui, et ce mod est aussi compatible avec [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3745864998]Googly Eyes[/url])
+
+[h1]Mode rééquilibré[/h1]
+Parmi les options se trouve un ambitieux Mode rééquilibré. Son but est de retravailler les événements de Slay the Spire 1 pour mieux correspondre aux philosophies de design que j'observe dans les événements de Slay the Spire 2, en gros :
+[list]
+[*]Si vous entrez dans un événement, QUELQUE CHOSE changera. Fini les boutons « Partir » et compagnie qui vous laissent simplement passer à la salle suivante.
+[*]Les événements de Slay the Spire 2 sont globalement plus puissants que ceux de Slay the Spire 1.
+[*]Les événements de Slay the Spire 2 sont globalement plus « palpitants », avec par exemple des occasions d'obtenir des Envoûtements.
+[/list]
+Le Mode rééquilibré est désactivé par défaut, mais je vous encourage à l'activer et à me dire ce que vous en pensez ! :)
+
+Par ailleurs, même si je vous encourage à le découvrir à l'aveugle, si vous voulez simplement consulter les changements apportés par le Mode rééquilibré, ils sont listés dans [url=https://docs.google.com/document/d/1QYCLq_Cke5DHNGgrV3XWfMO-njLcGtvKvUCJwf6jvf4/edit?usp=sharing]ce document[/url].
+
+[h1]Foire aux questions[/h1]
+[h2]Comment l'Ascension affecte-t-elle le comportement des ennemis ?[/h2]
+Par défaut, les ennemis utilisent leurs schémas d'attaque de l'Ascension 17+ de Slay the Spire 1. Le Diablotin Nob, par exemple, appliquera donc toujours Vulnérable au joueur au tour 2, avant d'enchaîner 2 gros coups. Les ennemis utilisent aussi leurs valeurs de PV/dégâts les plus basses de Slay the Spire 1, mais si les Ascensions Ennemis coriaces/Ennemis meurtriers sont actives, ils passent à leurs valeurs les plus hautes de Slay the Spire 1. J'espère que c'est clair ! En résumé : les ennemis sont plus coriaces par défaut, et à l'Ascension maximale, ils correspondent à leur comportement de l'A19+ du jeu d'origine.
+
+[h2]Ce mod ajoute-t-il l'Acte 4 de Slay the Spire 1, et sinon, sera-t-il ajouté un jour ?[/h2]
+Non et non. Je ne voudrais pas ajouter l'Acte 4 avant que Slay the Spire 2 n'ajoute son propre Acte 4, et de toute façon, [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3747537811]un autre moddeur l'a déjà fait.[/url]
+
+[h2]Où puis-je discuter plus activement de ce mod ?[/h2]
+N'hésitez pas à rejoindre le serveur Discord de Slay the Spire. Acts from the Past y a son propre fil dans la section #modding-forum.
+
+[h2]Pourquoi ce mod ne prend-il pas en charge la branche principale de Slay the Spire 2 ?[/h2]
+Si j'avais un temps et une énergie illimités, je maintiendrais deux versions d'Acts from the Past, mais... ce n'est pas le cas. Avec mon emploi du temps, il est bien plus réaliste de n'en maintenir qu'une seule, et je choisis de maintenir celle qui m'enthousiasme le plus : la branche qui reçoit des changements fréquents, expérimentaux et intéressants.
+
+[h2]De l'IA a-t-elle été utilisée pour créer ce mod ?[/h2]
+Oui. Ce mod contient du code et des shaders écrits par IA. Par ailleurs, si la majorité des traductions non anglaises a été réalisée par des humains, pour de petites modifications du mod, il peut m'arriver d'utiliser l'IA plutôt que de solliciter et déranger chaque traducteur.
+
+[h2]Quels sont les projets futurs pour Acts from the Past ?[/h2]
+La maintenance générale et l'équilibrage du Mode rééquilibré sont mes priorités. Il reste aussi beaucoup d'illustrations provisoires que j'aimerais remplacer, mais il faudrait pour cela que des artistes se manifestent. Notez que les images générées par IA ne seront pas acceptées pour ce mod.
+
+[h2]Puis-je utiliser le code de ce mod pour mes propres projets ?[/h2]
+Absolument ! N'hésitez pas à vous référer à ce qui se trouve sur [url=https://github.com/Cany0udance/ActsFromThePast]GitHub[/url] et/ou à décompiler le .pck pour en réutiliser les ressources, tant que votre mod n'est pas, disons, une simple réédition ou un remake de celui-ci. Vous n'avez même pas besoin de me créditer (même si ça ferait plaisir) : mon plus grand souhait est de permettre aux moddeurs de créer des trucs cool aussi facilement que possible !
+
+[h1]Crédits supplémentaires[/h1]
+[list]
+[*][b]Nitablade[/b] - Traduction russe
+[*][b]snumodder[/b] - Traduction coréenne
+[*][b]Sashimi_knife[/b] - Traduction japonaise
+[*][b]floca[/b] - Traduction portugaise (Brésil)
+[*][b]jjkkllike & ImLingCheng[/b] - Traduction chinoise simplifiée
+[*][b]flounder[/b] - Illustration de la relique Banque de sang
+[*][b]Book & Ajama[/b] - Soutien général
+[*][b]Aurora[/b] - Soutien critique post-lancement
+[/list]
